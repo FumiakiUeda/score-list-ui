@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>楽譜リスト作成ツール</title>
+</head>
+
+<body>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <header>
+        <div class="container section row">
+            <h2 class="header">楽譜リスト作成ツール</h2>
+        </div>
+    </header>
+    <main>
+        <div class="container section row">
+            <div class="score-input">
+                <form action="new-score" class="col s12">
+                    <h6 class="header">曲の情報</h6>
+                    <div class="input-field col s12">
+                        <input id="song_name" type="text" class="validate">
+                        <label for="song_name">曲名</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="song_composer" type="text" class="validate">
+                        <label for="song_composer">作曲家</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="song_arrenger" type="text" class="validate">
+                        <label for="song_arrenger">編曲家</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select>
+                            <option value="" disabled selected>不明</option>
+                            <option value="New Sound in Brass">New Sound in Brass</option>
+                            <option value="Winds">Winds</option>
+                            <option value="Music8">Music8</option>
+                            <option value="その他">その他</option>
+                        </select>
+                        <label>出版社</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="song_detail" type="text" class="validate">
+                        <label for="song_detail">備考</label>
+                    </div>
+
+                    <h6 class="header">足りないパート譜</h6>
+                    <div class="input-field col s12">
+                        <p>
+                            <label>
+                                <input type="checkbox" value="Flute" />
+                                <span class="checkbox">Flute</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Clarinet" />
+                                <span class="checkbox">Clarinet</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Saxophone" />
+                                <span class="checkbox">Saxophone</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Trumpet" />
+                                <span class="checkbox">Trumpet</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Horn" />
+                                <span class="checkbox">Horn</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Trombone" />
+                                <span class="checkbox">Trombone</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Euphonium" />
+                                <span class="checkbox">Euphonium</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Tuba" />
+                                <span class="checkbox">Tuba</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Percussion" />
+                                <span class="checkbox">Percussion</span>
+                            </label>
+                        </p>
+                    </div>
+                </form>
+                <div class="col s12 right-align">
+                    <button class="btn waves-effect waves-light" onclick="addTableRow();">曲追加</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container section row">
+            <h4 class="header">楽譜リスト</h4>
+            <div class="score-table col s12">
+                <table class="highlight" id="scoreTable">
+                    <thead>
+                        <tr>
+                            <th>曲名</th>
+                            <th>作曲家</th>
+                            <th>編曲家</th>
+                            <th>出版社</th>
+                            <th>備考</th>
+                            <th>足りないパート譜</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="container section row right-align">
+            <a id="download" class="btn waves-effect waves-light" download="scorelist.csv" onclick="tableDownload();">
+                SVG保存<i class="material-icons right">get_app</i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container row">
+            <div class="footer-copyright right-align">
+                <small>Copyright&copy; 2020 UmiKazeYu</small>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
