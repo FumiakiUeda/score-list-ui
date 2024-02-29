@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const notojp = Noto_Sans_JP({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+config.autoAddCss = false;
 
 export const metadata: Metadata = {
   title: "楽譜リスト作成ツール",
@@ -16,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>{children}</body>
+      <body className={notojp.className}>{children}</body>
     </html>
   );
 }
