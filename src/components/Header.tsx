@@ -54,7 +54,7 @@ export function Header() {
                       height={32}
                     />
                     <div className="px-3 py-2 w-auto">
-                      楽譜リスト作成ツール
+                      譜面リスト作成ツール
                     </div>
                   </div>
                 </Link>
@@ -77,13 +77,14 @@ export function Header() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
+                <Link
+                  href={'/new'}
                   className="border-neutral-400 hover:bg-neutral-400 px-3 py-2 border rounded-md text-sm font-medium mx-3"
                 >
+
                   <FontAwesomeIcon icon={faPlus} className='pr-1.5' />
-                  作成
-                </button>
+                  譜面を追加
+                </Link>
                 <button
                   type="button"
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -172,7 +173,8 @@ export function Header() {
             </div>
           </Disclosure.Panel>
         </>
-      )}
-    </Disclosure>
+      )
+      }
+    </Disclosure >
   )
 }
