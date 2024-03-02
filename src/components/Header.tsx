@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
 const navigation = [
   // { name: 'News', href: '/learning/news' },
@@ -75,6 +77,13 @@ export function Header() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <button
+                  type="button"
+                  className="border-neutral-400 hover:bg-neutral-400 px-3 py-2 border rounded-md text-sm font-medium mx-3"
+                >
+                  <FontAwesomeIcon icon={faPlus} className='pr-1.5' />
+                  作成
+                </button>
                 <button
                   type="button"
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
