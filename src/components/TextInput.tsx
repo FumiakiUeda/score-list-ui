@@ -1,12 +1,12 @@
 type Props = {
-  col: number
+  class: string
   label: string
   input: string
 }
 
 export function TextInput(props: Props) {
   return (
-    <div className={"sm:col-span-" + props.col}>
+    <div className={props.class}>
       <label htmlFor={props.input} className="block text-sm font-medium leading-6 text-neutral-400">
         {props.label}
       </label>

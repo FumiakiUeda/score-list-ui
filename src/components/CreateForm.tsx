@@ -22,19 +22,19 @@ export function CreateForm() {
           <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
 
             <TextInput
-              col={6}
+              class={"sm:col-span-6"}
               label={"曲名"}
               input={"songTitle"}
             />
 
             <TextInput
-              col={2}
+              class={"sm:col-span-2"}
               label={"作曲者"}
               input={"composer"}
             />
 
             <TextInput
-              col={2}
+              class={"sm:col-span-2"}
               label={"編曲者"}
               input={"arranger"}
             />
@@ -59,7 +59,7 @@ export function CreateForm() {
             </div>
 
             <TextInput
-              col={6}
+              class={"sm:col-span-6"}
               label={"備考"}
               input={"note"}
             />
