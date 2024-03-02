@@ -8,6 +8,11 @@ const parts = [
   "Bassoon",
 ];
 
+const publishers = [
+  "ブレーン",
+  "ミュージック8",
+  "New Sounds in Brass",
+];
 
 export function CreateForm() {
   return (
@@ -44,9 +49,11 @@ export function CreateForm() {
                   name="publisher"
                   className="block w-full rounded-md border-0 py-1.5 pl-3 pr-7 text-white shadow-sm ring-1 ring-inset ring-neutral-600 focus:ring-2 focus:ring-inset focus:ring-neutral-700 sm:leading-6 bg-neutral-800"
                 >
-                  <option>ブレーン</option>
-                  <option>ミュージック8</option>
-                  <option>New Sounds Brass</option>
+                  {publishers.map((publisher, index) => (
+                    <option key={index}>
+                      {publisher}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
