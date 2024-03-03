@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Heading } from "@/components/Heading";
-import { CreateForm } from "../../components/CreateForm";
+import { CreateForm } from "@/components/CreateForm";
 
 export default function Home() {
   return (
