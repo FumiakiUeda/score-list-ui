@@ -9,7 +9,8 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
-const navigation = [
+const navigation: object = [
+  // { name: '', href: '' },
   // { name: 'News', href: '/learning/news' },
   // { name: 'Article', href: '/learning/news/article' },
   // { name: 'Login', href: '/learning/login' },
