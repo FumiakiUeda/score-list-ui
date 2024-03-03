@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons"
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons"
-import { faGripLines } from "@fortawesome/free-solid-svg-icons"
+import Link from "next/link"
 
 const songs = [
   {
@@ -73,9 +73,12 @@ export function List() {
             <td className="px-3 py-3" key={song.id}>{song.note}</td>
             <td className="px-3 py-3" key={song.id}>{song.missingParts.join(', ')}</td>
             <td className="px-3 py-3" key={song.id}>
-              <a href="#" className="px-1.5 py-1.5 text-neutral-400 hover:text-white">
+              <Link
+                href={'/edit/' + song.id}
+                className="px-1.5 py-1.5 text-neutral-400 hover:text-white"
+              >
                 <FontAwesomeIcon icon={faPenToSquare} />
-              </a>
+              </Link>
               <a href="#" className="px-1.5 py-1.5 text-neutral-400 hover:text-white">
                 <FontAwesomeIcon icon={faTrashCan} />
               </a>
