@@ -2,7 +2,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-export function Pagenation() {
+type Props = {
+  total: number
+}
+
+export function Pagenation(props: Props) {
+  const perPage = 10
+  const page = 1
+  const startIndex = (page - 1) * perPage + 1;
+  const endIndex = Math.min(startIndex + perPage - 1, props.total);
+
   return (
     <div className="flex items-center justify-between px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
@@ -22,7 +31,7 @@ export function Pagenation() {
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-neutral-400">
-            <span className="font-medium">97</span>件中<span className="font-medium">1</span>～<span className="font-medium">10</span>件を表示
+            <span className="font-medium">{props.total}</span>件中<span className="font-medium">{startIndex}</span>～<span className="font-medium">{endIndex}</span>件を表示
           </p>
         </div>
         <div>

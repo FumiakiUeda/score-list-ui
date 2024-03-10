@@ -26,7 +26,7 @@ export function CreateForm() {
             <TextInput
               class={"sm:col-span-6"}
               label={"曲名"}
-              input={"songTitle"}
+              input={"name"}
             />
 
             <TextInput
@@ -57,7 +57,7 @@ export function CreateForm() {
             <CheckBoxInput
               class={"sm:col-span-6"}
               label={"不足パート譜"}
-              input={"missingParts"}
+              input={"part[]"}
               options={parts}
             />
 
