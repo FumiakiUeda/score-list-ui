@@ -4,9 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons"
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons"
 import { Pagenation } from "@/components/Pagenation";
+import { useScoreList } from "@/hooks/backend";
 import Link from "next/link"
-import axios from "@/lib/axios"
-import useSWR from "swr"
 
 interface Score {
   id: number;
@@ -20,14 +19,7 @@ interface Score {
 
 export function List() {
 
-  const { data: scores, error } = useSWR<Score[]>('/api/scores', () =>
-    axios
-      .get('/api/scores')
-      .then(res => res.data)
-      .catch(error => {
-        if (error.response.status !== 200) throw error
-      })
-  )
+  const { scores, error } = useScoreList();
 
   const scoreLength = scores ? scores.length : 0;
 
