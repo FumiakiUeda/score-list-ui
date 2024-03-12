@@ -10,10 +10,10 @@ export function CheckBoxInput(props: Props) {
     <div className={props.class}>
       <div className="mt-1 space-y-10">
         <fieldset>
-          <legend className="text-sm font-semibold leading-6 text-neutral-400">{props.label}</legend>
-          <div className="mt-2 space-x-6 flex">
+          <legend className="text-sm font-semibold leading-6 text-neutral-500 dark:text-neutral-400">{props.label}</legend>
+          <div className="mt-2 flex flex-wrap">
             {props.options.map((option, index) => (
-              <div className="relative flex gap-x-2" key={index}>
+              <div className="relative flex gap-x-2 mr-6" key={index}>
                 <div className="flex h-6 items-center">
                   <input
                     id={option}
@@ -24,7 +24,7 @@ export function CheckBoxInput(props: Props) {
                   />
                 </div>
                 <div className="text-sm leading-6">
-                  <label htmlFor={option} className="font-medium text-neutral-400">
+                  <label htmlFor={option} className="font-medium dark:text-neutral-400">
                     {option}
                   </label>
                 </div>
