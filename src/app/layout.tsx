@@ -13,8 +13,8 @@ const notojp = Noto_Sans_JP({
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
-  title: "楽譜リスト作成ツール",
-  description: "楽譜リスト作成ツール",
+  title: "譜面リスト作成ツール",
+  description: "譜面リスト作成ツール",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={notojp.className}>{children}</body>
+      <body className={notojp.className + ' dark:text-white dark:bg-neutral-900'}>{children}</body>
     </html>
   );
 }
