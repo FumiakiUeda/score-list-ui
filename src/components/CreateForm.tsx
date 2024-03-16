@@ -3,6 +3,16 @@ import { TextInput } from "./TextInput";
 import { SelectBoxInput } from "./SelectBoxInput";
 import { CheckBoxInput } from "./CheckBoxInput";
 
+type Props = {
+  id: number;
+  name: string;
+  composer: string;
+  arranger: string;
+  publisher: number;
+  note: string;
+  part: { part_id: number }[];
+}
+
 const parts = [
   "Flute",
   "Clarinet",
@@ -16,7 +26,8 @@ const publishers = [
   "New Sounds in Brass",
 ];
 
-export function CreateForm() {
+export function CreateForm(props: Props) {
+  console.log(props)
   return (
     <form>
       <div className="space-y-12">
@@ -27,18 +38,21 @@ export function CreateForm() {
               class={"sm:col-span-6"}
               label={"曲名"}
               input={"name"}
+              value={props.name}
             />
 
             <TextInput
               class={"sm:col-span-2"}
               label={"作曲者"}
               input={"composer"}
+              value={props.composer}
             />
 
             <TextInput
               class={"sm:col-span-2"}
               label={"編曲者"}
               input={"arranger"}
+              value={props.arranger}
             />
 
             <SelectBoxInput
@@ -46,12 +60,14 @@ export function CreateForm() {
               label={"出版社"}
               input={"publisher"}
               options={publishers}
+              value={props.publisher}
             />
 
             <TextInput
               class={"sm:col-span-6"}
               label={"備考"}
               input={"note"}
+              value={props.note}
             />
 
             <CheckBoxInput
