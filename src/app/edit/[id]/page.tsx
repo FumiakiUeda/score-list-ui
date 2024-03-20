@@ -3,22 +3,16 @@
 import { Header } from "@/components/Header";
 import { Heading } from "@/components/Heading";
 import { CreateForm } from "@/components/CreateForm";
-import { useEdit } from "@/hooks/backend";
-import { useParams, useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
-import axios from '@/lib/axios';
+import { useScoreEdit } from "@/hooks/backend";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const params = useParams();
   const [score, setScore] = useState(null);
 
-  const getScore = async () => {
-    await axios
-    .get('/api/score/' + params.id)
-    .then(res => setScore(res.data))
-  }
   useEffect(() => {
-    getScore();
+    useScoreEdit(params.id, setScore);
   }, [])
 
   return (

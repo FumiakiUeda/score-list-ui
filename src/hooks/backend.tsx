@@ -11,8 +11,10 @@ interface Score {
   part: { part_id: number }[];
 }
 
+type SetScoreFunction = (score: Score | null) => void;
+
 export function useScoreList() {
-  const { data: scores, error } = useSWR<Score[]>('/api/scores', () =>
+  const { data: scores, error, mutate } = useSWR<Score[]>('/api/scores', () =>
     axios
       .get('/api/scores')
       .then(res => res.data)
@@ -21,5 +23,14 @@ export function useScoreList() {
       })
   );
 
-  return { scores, error };
+  return {
+    scores,
+    error,
+  };
+};
+
+export async function useScoreEdit(id: string | string[] | undefined, setScore: SetScoreFunction) {
+  await axios
+    .get('/api/score/' + id)
+    .then(res => setScore(res.data))
 };
