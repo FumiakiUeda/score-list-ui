@@ -13,24 +13,30 @@ interface Score {
 
 type SetScoreFunction = (score: Score | null) => void;
 
-export function useScoreList() {
-  const { data: scores, error, mutate } = useSWR<Score[]>('/api/scores', () =>
-    axios
-      .get('/api/scores')
-      .then(res => res.data)
-      .catch(error => {
-        if (error.response.status !== 200) throw error;
-      })
-  );
+// Score一覧取得
+export async function useScoreList(setScores: React.Dispatch<React.SetStateAction<any>>): Promise<any> {
+  try {
+    // axiosを使用して非同期にデータを取得する
+    const response = await axios.get('/api/scores');
+    // レスポンスのデータを戻り値として返す
+    setScores(response.data);
+  } catch (error) {
+    // エラーハンドリング
+    console.error('Error fetching data:', error);
+    throw error; // エラーを再スローします。
+  }
+}
 
-  return {
-    scores,
-    error,
-  };
-};
-
-export async function useScoreEdit(id: string | string[] | undefined, setScore: SetScoreFunction) {
-  await axios
-    .get('/api/score/' + id)
-    .then(res => setScore(res.data))
-};
+// 編集するScore取得
+export async function useScoreEdit(id: string | string[] | undefined, setScore: React.Dispatch<React.SetStateAction<any>>) {
+  try {
+    // axiosを使用して非同期にデータを取得する
+    const response = await axios.get('/api/score/' + id);
+    // レスポンスのデータをsetする
+    setScore(response.data);
+  } catch (error) {
+    // エラーハンドリング
+    console.error('Error fetching data:', error);
+    throw error; // エラーを再スローします。
+  }
+}

@@ -12,8 +12,8 @@ export default function Home() {
   const [score, setScore] = useState(null);
 
   useEffect(() => {
-    useScoreEdit(params.id, setScore);
-  }, [])
+    useScoreEdit(params.id, setScore)
+  }, [params.id])
 
   return (
     <>

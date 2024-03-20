@@ -5,6 +5,7 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons"
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons"
 import { Pagenation } from "@/components/Pagenation";
 import { useScoreList } from "@/hooks/backend";
+import { useEffect, useState } from "react";
 import Link from "next/link"
 
 interface Score {
@@ -18,8 +19,12 @@ interface Score {
 }
 
 export function List() {
+  const [scores, setScores] = useState(null);
 
-  const { scores, error } = useScoreList();
+  // スコアリストを取得してscoresを更新
+  useEffect(() => {
+    useScoreList(setScores)
+  }, [])
 
   const scoreLength = scores ? scores.length : 0;
 
