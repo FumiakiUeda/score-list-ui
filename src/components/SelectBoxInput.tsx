@@ -23,7 +23,10 @@ export function SelectBoxInput(props: Props) {
         >
           {props.options.map((option, index) => {
             return (
-              <option key={index}>
+              <option
+                key={index}
+                value={index}
+              >
                 {option}
               </option>
             )

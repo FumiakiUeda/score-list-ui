@@ -3,7 +3,10 @@ import { TextInput } from "./TextInput";
 import { SelectBoxInput } from "./SelectBoxInput";
 import { CheckBoxInput } from "./CheckBoxInput";
 
+type SubmitFunction = () => void;
+
 type Props = {
+  submitFunc: SubmitFunction;
   id: number;
   name: string;
   composer: string;
@@ -29,7 +32,7 @@ const publishers = [
 export function CreateForm(props: Props) {
   console.log(props)
   return (
-    <form>
+    <form onSubmit={props.submitFunc}>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">

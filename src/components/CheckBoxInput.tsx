@@ -20,7 +20,7 @@ export function CheckBoxInput(props: Props) {
                     name={props.input+[]}
                     type="checkbox"
                     className="h-4 w-4 rounded border-neutral-600 text-indigo-600 focus:ring-neutral-700"
-                    value={option}
+                    value={index}
                   />
                 </div>
                 <div className="text-sm leading-6">
