@@ -22,8 +22,8 @@ export async function useScoreList(setScores: React.Dispatch<React.SetStateActio
     setScores(response.data);
   } catch (error) {
     // エラーハンドリング
-    console.error('Error fetching data:', error);
-    throw error; // エラーを再スローします。
+    console.error('Error fetching data in useScoreList:', error);
+    throw error; // エラーを再スローする
   }
 }
 
@@ -36,8 +36,8 @@ export async function useScoreEdit(id: string | string[] | undefined, setScore: 
     setScore(response.data);
   } catch (error) {
     // エラーハンドリング
-    console.error('Error fetching data:', error);
-    throw error; // エラーを再スローします。
+    console.error('Error fetching data in useScoreEdit:', error);
+    throw error; // エラーを再スローする
   }
 }
 
@@ -52,7 +52,23 @@ export async function useScoreCreate(params: FormData, useRouter: NextRouter) {
       })
   } catch (error) {
     // エラーハンドリング
-    console.error('Error fetching data:', error);
-    throw error; // エラーを再スローします。
+    console.error('Error fetching data in useScoreCreate:', error);
+    throw error; // エラーを再スローする
+  }
+}
+
+// 削除するScore取得
+export async function useScoreDestroy(id: number | number[] | undefined, useRouter: NextRouter) {
+  try {
+    // axiosを使用して非同期にデータを取得する
+    await axios
+      .delete('/api/score/' + id)
+      .then(() => {
+        useRouter.push('/')
+      })
+  } catch (error) {
+    // エラーハンドリング
+    console.error('Error fetching data in :', error);
+    throw error; // エラーを再スローする
   }
 }

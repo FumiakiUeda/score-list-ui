@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons"
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons"
 import { Pagenation } from "@/components/Pagenation";
-import { useScoreList } from "@/hooks/backend";
-import { useEffect, useState } from "react";
+import { useScoreDestroy, useScoreList } from "@/hooks/backend";
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link"
 
 interface Score {
@@ -19,10 +20,17 @@ interface Score {
 }
 
 export function List() {
+  const router = useRouter();
   const [scores, setScores] = useState(null);
 
   // スコアリストを取得してscoresを更新
   useEffect(() => {
+    useScoreList(setScores)
+  }, [])
+
+  // クリックした譜面を削除
+  const handleDelete = useCallback(async (id: number) => {
+    await useScoreDestroy(id, router)
     useScoreList(setScores)
   }, [])
 
@@ -54,7 +62,13 @@ export function List() {
                   >
                     <FontAwesomeIcon icon={faPenToSquare} />
                   </Link>
-                  <a href="#" className="px-1.5 py-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white">
+                  <a
+                    href="#"
+                    className="px-1.5 py-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white"
+                    onClick={() => {
+                      handleDelete(score.id)
+                    }}
+                  >
                     <FontAwesomeIcon icon={faTrashCan} />
                   </a>
                 </div>
