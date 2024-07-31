@@ -3,9 +3,12 @@ type Props = {
   label: string
   input: string
   options: string[]
+  value: string[]
 }
 
 export function CheckBoxInput(props: Props) {
+  console.log(props.value);
+  // props.value.map(item => item["part_id"])
   return (
     <div className={props.class}>
       <div className="mt-1 space-y-10">
@@ -21,6 +24,7 @@ export function CheckBoxInput(props: Props) {
                     type="checkbox"
                     className="h-4 w-4 rounded border-neutral-600 text-indigo-600 focus:ring-neutral-700"
                     value={index}
+                    defaultChecked={props.value.some(item => item.part_id === index)}
                   />
                 </div>
                 <div className="text-sm leading-6">

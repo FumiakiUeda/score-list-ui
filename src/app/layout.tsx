@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
-import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from "@fortawesome/fontawesome-svg-core";
+import { APP_DATA } from "@/constants/appdata";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.css";
 
 const notojp = Noto_Sans_JP({
@@ -13,8 +14,8 @@ const notojp = Noto_Sans_JP({
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
-  title: "譜面リスト作成ツール",
-  description: "譜面リスト作成ツール",
+  title: APP_DATA.APP_NAME,
+  description: APP_DATA.APP_DESCRIPTION,
 };
 
 export default function RootLayout({
@@ -23,8 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
-      <body className={notojp.className + ' dark:text-white dark:bg-neutral-900'}>{children}</body>
+    <html lang={APP_DATA.LOCALE}>
+      <body
+        className={notojp.className + " dark:text-white dark:bg-neutral-900"}
+      >
+        {children}
+      </body>
     </html>
   );
 }

@@ -20,7 +20,7 @@ export function TextInput(props: Props) {
           name={props.input}
           className="block w-full rounded-md border-0 py-1.5 px-3 dark:text-white shadow-sm ring-1 ring-inset ring-neutral-400 dark:ring-neutral-600 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus:ring-2 focus:ring-inset focus:ring-neutral-700 sm:leading-6 dark:bg-neutral-800"
           placeholder=""
-          value={props.value}
+          defaultValue={props.value}
         />
       </div>
     </div>

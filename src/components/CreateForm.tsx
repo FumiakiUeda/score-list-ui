@@ -2,6 +2,8 @@ import Link from "next/link";
 import { TextInput } from "./TextInput";
 import { SelectBoxInput } from "./SelectBoxInput";
 import { CheckBoxInput } from "./CheckBoxInput";
+import { PART_NAME, PUBLISHERS } from "@/constants/scoredata";
+import { LINK_DATA } from "@/constants/linkdata";
 
 type SubmitFunction = () => void;
 
@@ -14,29 +16,17 @@ type Props = {
   publisher: number;
   note: string;
   part: { part_id: number }[];
-}
+};
 
-const parts = [
-  "Flute",
-  "Clarinet",
-  "Oboe",
-  "Bassoon",
-];
-
-const publishers = [
-  "ブレーン",
-  "ミュージック8",
-  "New Sounds in Brass",
-];
+const parts = PART_NAME;
+const publishers = PUBLISHERS;
 
 export function CreateForm(props: Props) {
-  console.log(props)
   return (
     <form onSubmit={props.submitFunc}>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
-
             <TextInput
               class={"sm:col-span-6"}
               label={"曲名"}
@@ -78,15 +68,15 @@ export function CreateForm(props: Props) {
               label={"不足パート譜"}
               input={"part[]"}
               options={parts}
+              value={props.part}
             />
-
           </div>
         </div>
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <Link
-          href={'/'}
+          href={LINK_DATA.HOME_LINK}
           className="text-sm font-semibold leading-6 text-neutral-400"
         >
           Cancel
@@ -99,5 +89,5 @@ export function CreateForm(props: Props) {
         </button>
       </div>
     </form>
-  )
+  );
 }

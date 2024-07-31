@@ -6,7 +6,10 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons"
 import { Pagenation } from "@/components/Pagenation";
 import { useScoreDestroy, useScoreList } from "@/hooks/backend";
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Loading } from "@/components/Loading";
+import { PART_NAME, PUBLISHERS } from "@/constants/scoredata";
+import { LINK_DATA } from "@/constants/linkdata";
 import Link from "next/link"
 
 interface Score {
@@ -19,14 +22,20 @@ interface Score {
   part: { part_id: number }[];
 }
 
+const parts = PART_NAME;
+const publishers = PUBLISHERS;
+
 export function List() {
   const router = useRouter();
   const [scores, setScores] = useState(null);
+  const searchParams = useSearchParams();
+  const pageNum = searchParams.get("page");
+  console.log(pageNum);
 
   // スコアリストを取得してscoresを更新
   useEffect(() => {
-    useScoreList(setScores)
-  }, [])
+    useScoreList(setScores, router)
+  }, [router])
 
   // クリックした譜面を削除
   const handleDelete = useCallback(async (id: number) => {
@@ -34,9 +43,13 @@ export function List() {
     useScoreList(setScores)
   }, [])
 
-  const scoreLength = scores ? scores.length : 0;
+  const scoreLength = scores ? scores.total : 0;
 
+  if (!scores) {
+    return  <Loading />;
+  }
   return (
+
     <div className="w-full overflow-x-auto">
       <table className="table-auto w-full">
         <thead>
@@ -50,14 +63,14 @@ export function List() {
           </tr>
         </thead>
         <tbody>
-          {scores && scores.map((score: Score) => (
+          {scores && scores.data.map((score: Score) => (
             <tr className="border-b border-neautral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800" key={score.id}>
               <td className="px-3 py-3"><div>
                 {score.name}
               </div>
                 <div className="mt-2">
                   <Link
-                    href={'/edit/' + score.id}
+                    href={LINK_DATA.EDIT_LINK + score.id}
                     className="px-1.5 py-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white"
                   >
                     <FontAwesomeIcon icon={faPenToSquare} />
@@ -75,14 +88,14 @@ export function List() {
               </td>
               <td className="px-3 py-3">{score.composer}</td>
               <td className="px-3 py-3">{score.arranger}</td>
-              <td className="px-3 py-3">{score.publisher}</td>
+              <td className="px-3 py-3">{publishers[score.publisher]}</td>
               <td className="px-3 py-3">{score.note}</td>
-              <td className="px-3 py-3">{score.part.map((val) => { return val.part_id }).join(', ')}</td>
+              <td className="px-3 py-3">{score.part.map((val) => { return parts[val.part_id] }).join(', ')}</td>
             </tr>
           ))}
         </tbody>
       </table >
-      <Pagenation total={scoreLength} />
+      <Pagenation total={scoreLength} data={scores} />
     </div>
   )
 }

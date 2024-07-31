@@ -1,13 +1,15 @@
 "use client";
 
 import Link from 'next/link'
+import Image from 'next/image';
 import { Fragment } from 'react'
 import { usePathname } from "next/navigation";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { APP_DATA } from "@/constants/appdata";
+import { LINK_DATA } from "@/constants/linkdata";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -23,7 +25,7 @@ export function Header() {
           <div className="relative flex h-16 items-center justify-between">
             <div className="flex flex-1 items-center sm:items-stretch justify-start">
               <Link
-                href="/"
+                href={LINK_DATA.HOME_LINK}
               >
                 <div className="flex flex-shrink-0 items-center">
                   <Image
@@ -34,14 +36,14 @@ export function Header() {
                     height={32}
                   />
                   <div className="px-3 py-2 w-auto">
-                    譜面リスト作成ツール
+                    {APP_DATA.APP_NAME}
                   </div>
                 </div>
               </Link>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <Link
-                href={'/new'}
+                href={LINK_DATA.NEW_LINK}
                 className="border-neutral-400 hover:bg-neutral-400 px-3 py-2 border rounded-md text-sm font-medium mx-3"
               >
                 <FontAwesomeIcon icon={faPlus} />

@@ -1,3 +1,4 @@
+import { LINK_DATA } from '@/constants/linkdata';
 import axios from '@/lib/axios';
 import { NextRouter } from 'next/router';
 
@@ -14,10 +15,10 @@ interface Score {
 type SetScoreFunction = (score: Score | null) => void;
 
 // Score一覧取得
-export async function useScoreList(setScores: React.Dispatch<React.SetStateAction<any>>): Promise<any> {
+export async function useScoreList(setScores: React.Dispatch<React.SetStateAction<any>>, page: number = 1): Promise<any> {
   try {
     // axiosを使用して非同期にデータを取得する
-    const response = await axios.get('/api/scores');
+    const response = await axios.get('/api/scores/5?page=' + page);
     // レスポンスのデータを戻り値として返す
     setScores(response.data);
   } catch (error) {
@@ -48,7 +49,7 @@ export async function useScoreCreate(params: FormData, useRouter: NextRouter) {
     await axios
       .post('/api/score', params)
       .then(() => {
-        useRouter.push('/')
+        useRouter.push(LINK_DATA.HOME_LINK)
       })
   } catch (error) {
     // エラーハンドリング
@@ -64,7 +65,7 @@ export async function useScoreDestroy(id: number | number[] | undefined, useRout
     await axios
       .delete('/api/score/' + id)
       .then(() => {
-        useRouter.push('/')
+        useRouter.push(LINK_DATA.HOME_LINK)
       })
   } catch (error) {
     // エラーハンドリング
