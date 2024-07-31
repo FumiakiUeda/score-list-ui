@@ -7,8 +7,6 @@ type Props = {
 }
 
 export function CheckBoxInput(props: Props) {
-  console.log(props.value);
-  // props.value.map(item => item["part_id"])
   return (
     <div className={props.class}>
       <div className="mt-1 space-y-10">

@@ -28,14 +28,15 @@ const publishers = PUBLISHERS;
 export function List() {
   const router = useRouter();
   const [scores, setScores] = useState(null);
+
+  // ページ番号をクエリから取得
   const searchParams = useSearchParams();
   const pageNum = searchParams.get("page");
-  console.log(pageNum);
 
   // スコアリストを取得してscoresを更新
   useEffect(() => {
-    useScoreList(setScores, router)
-  }, [router])
+    useScoreList(setScores, pageNum)
+  }, [pageNum])
 
   // クリックした譜面を削除
   const handleDelete = useCallback(async (id: number) => {
