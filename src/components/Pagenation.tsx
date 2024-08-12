@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link"
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   total: number;
@@ -62,7 +64,9 @@ export function Pagenation(props: Props) {
             {props.data &&
               props.data.links.map((link: Link) => (
                 <Link
-                  href={!link.active && link.url ? extractQueryParam(link.url) : "#"}
+                  href={
+                    !link.active && link.url ? extractQueryParam(link.url) : "#"
+                  }
                   aria-current="page"
                   className={
                     link.active

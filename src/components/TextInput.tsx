@@ -1,16 +1,17 @@
-import { useEffect } from "react"
-
 type Props = {
-  class: string
-  label: string
-  input: string
-  value: string
-}
+  class: string;
+  label: string;
+  input: string;
+  value: string;
+};
 
 export function TextInput(props: Props) {
   return (
     <div className={props.class}>
-      <label htmlFor={props.input} className="block text-sm font-semibold leading-6 text-neutral-500 dark:text-neutral-400">
+      <label
+        htmlFor={props.input}
+        className="block text-sm font-semibold leading-6 text-neutral-500 dark:text-neutral-400"
+      >
         {props.label}
       </label>
       <div className="mt-2">
@@ -24,5 +25,5 @@ export function TextInput(props: Props) {
         />
       </div>
     </div>
-  )
+  );
 }

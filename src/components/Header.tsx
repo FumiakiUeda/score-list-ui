@@ -1,18 +1,17 @@
 "use client";
 
-import Link from 'next/link'
-import Image from 'next/image';
-import { Fragment } from 'react'
+import Link from "next/link";
+import Image from "next/image";
+import { Fragment } from "react";
 import { usePathname } from "next/navigation";
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { APP_DATA } from "@/constants/appdata";
 import { LINK_DATA } from "@/constants/linkdata";
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export function Header() {
@@ -24,9 +23,7 @@ export function Header() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="flex flex-1 items-center sm:items-stretch justify-start">
-              <Link
-                href={LINK_DATA.HOME_LINK}
-              >
+              <Link href={LINK_DATA.HOME_LINK}>
                 <div className="flex flex-shrink-0 items-center">
                   <Image
                     className="h-8 w-auto"
@@ -35,9 +32,7 @@ export function Header() {
                     width={32}
                     height={32}
                   />
-                  <div className="px-3 py-2 w-auto">
-                    {APP_DATA.APP_NAME}
-                  </div>
+                  <div className="px-3 py-2 w-auto">{APP_DATA.APP_NAME}</div>
                 </div>
               </Link>
             </div>
@@ -47,7 +42,9 @@ export function Header() {
                 className="border-neutral-400 hover:bg-neutral-400 px-3 py-2 border rounded-md text-sm font-medium mx-3"
               >
                 <FontAwesomeIcon icon={faPlus} />
-                <span className='hidden sm:inline-block pl-1.5'>譜面を追加</span>
+                <span className="hidden sm:inline-block pl-1.5">
+                  譜面を追加
+                </span>
               </Link>
 
               {/* Profile dropdown */}
@@ -77,7 +74,10 @@ export function Header() {
                       {({ active }) => (
                         <a
                           href="#"
-                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          className={classNames(
+                            active ? "bg-gray-100" : "",
+                            "block px-4 py-2 text-sm text-gray-700"
+                          )}
                         >
                           Your Profile
                         </a>
@@ -87,7 +87,10 @@ export function Header() {
                       {({ active }) => (
                         <a
                           href="#"
-                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          className={classNames(
+                            active ? "bg-gray-100" : "",
+                            "block px-4 py-2 text-sm text-gray-700"
+                          )}
                         >
                           Settings
                         </a>
@@ -97,7 +100,10 @@ export function Header() {
                       {({ active }) => (
                         <a
                           href="#"
-                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          className={classNames(
+                            active ? "bg-gray-100" : "",
+                            "block px-4 py-2 text-sm text-gray-700"
+                          )}
                         >
                           Sign out
                         </a>
@@ -109,8 +115,7 @@ export function Header() {
             </div>
           </div>
         </div>
-      )
-      }
-    </Disclosure >
-  )
+      )}
+    </Disclosure>
+  );
 }

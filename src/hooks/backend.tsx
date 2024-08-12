@@ -1,6 +1,6 @@
-import { LINK_DATA } from '@/constants/linkdata';
-import axios from '@/lib/axios';
-import { NextRouter } from 'next/router';
+import axios from "@/lib/axios";
+import { NextRouter } from "next/router";
+import { LINK_DATA } from "@/constants/linkdata";
 
 interface Score {
   id: number;
@@ -15,29 +15,35 @@ interface Score {
 type SetScoreFunction = (score: Score | null) => void;
 
 // Score一覧取得
-export async function useScoreList(setScores: React.Dispatch<React.SetStateAction<any>>, page: number = 1): Promise<any> {
+export async function useScoreList(
+  setScores: React.Dispatch<React.SetStateAction<any>>,
+  page: number = 1
+): Promise<any> {
   try {
     // axiosを使用して非同期にデータを取得する
-    const response = await axios.get('/api/scores/5?page=' + page);
+    const response = await axios.get("/api/scores/5?page=" + page);
     // レスポンスのデータを戻り値として返す
     setScores(response.data);
   } catch (error) {
     // エラーハンドリング
-    console.error('Error fetching data in useScoreList:', error);
+    console.error("Error fetching data in useScoreList:", error);
     throw error; // エラーを再スローする
   }
 }
 
 // 編集するScore取得
-export async function useScoreEdit(id: string | string[] | undefined, setScore: React.Dispatch<React.SetStateAction<any>>) {
+export async function useScoreEdit(
+  id: string | string[] | undefined,
+  setScore: React.Dispatch<React.SetStateAction<any>>
+) {
   try {
     // axiosを使用して非同期にデータを取得する
-    const response = await axios.get('/api/score/' + id);
+    const response = await axios.get("/api/score/" + id);
     // レスポンスのデータをsetする
     setScore(response.data);
   } catch (error) {
     // エラーハンドリング
-    console.error('Error fetching data in useScoreEdit:', error);
+    console.error("Error fetching data in useScoreEdit:", error);
     throw error; // エラーを再スローする
   }
 }
@@ -46,30 +52,29 @@ export async function useScoreEdit(id: string | string[] | undefined, setScore: 
 export async function useScoreCreate(params: FormData, useRouter: NextRouter) {
   try {
     // axiosを使用して非同期にデータを送信する
-    await axios
-      .post('/api/score', params)
-      .then(() => {
-        useRouter.push(LINK_DATA.HOME_LINK)
-      })
+    await axios.post("/api/score", params).then(() => {
+      useRouter.push(LINK_DATA.HOME_LINK);
+    });
   } catch (error) {
     // エラーハンドリング
-    console.error('Error fetching data in useScoreCreate:', error);
+    console.error("Error fetching data in useScoreCreate:", error);
     throw error; // エラーを再スローする
   }
 }
 
 // 削除するScore取得
-export async function useScoreDestroy(id: number | number[] | undefined, useRouter: NextRouter) {
+export async function useScoreDestroy(
+  id: number | number[] | undefined,
+  useRouter: NextRouter
+) {
   try {
     // axiosを使用して非同期にデータを取得する
-    await axios
-      .delete('/api/score/' + id)
-      .then(() => {
-        useRouter.push(LINK_DATA.HOME_LINK)
-      })
+    await axios.delete("/api/score/" + id).then(() => {
+      useRouter.push(LINK_DATA.HOME_LINK);
+    });
   } catch (error) {
     // エラーハンドリング
-    console.error('Error fetching data in :', error);
+    console.error("Error fetching data in :", error);
     throw error; // エラーを再スローする
   }
 }
