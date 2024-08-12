@@ -12,8 +12,6 @@ interface Score {
   part: { part_id: number }[];
 }
 
-type SetScoreFunction = (score: Score | null) => void;
-
 // Score一覧取得
 export async function useScoreList(
   setScores: React.Dispatch<React.SetStateAction<any>>,
@@ -27,6 +25,20 @@ export async function useScoreList(
   } catch (error) {
     // エラーハンドリング
     console.error("Error fetching data in useScoreList:", error);
+    throw error; // エラーを再スローする
+  }
+}
+
+// 新規Score保存
+export async function useScoreCreate(params: FormData, useRouter: NextRouter) {
+  try {
+    // axiosを使用して非同期にデータを送信する
+    await axios.post("/api/score", params).then(() => {
+      useRouter.push(LINK_DATA.HOME_LINK);
+    });
+  } catch (error) {
+    // エラーハンドリング
+    console.error("Error fetching data in useScoreCreate:", error);
     throw error; // エラーを再スローする
   }
 }
@@ -48,21 +60,35 @@ export async function useScoreEdit(
   }
 }
 
-// 新規Score保存
-export async function useScoreCreate(params: FormData, useRouter: NextRouter) {
+// 編集したScoreデータを反映する
+export async function useScoreStore(
+  id: number | number[] | undefined,
+  params: FormData,
+  useRouter: NextRouter
+) {
   try {
-    // axiosを使用して非同期にデータを送信する
-    await axios.post("/api/score", params).then(() => {
+    // 送信するパラメータを構築
+    const requestBody = {
+      "name" : params.get("name"),
+      "composer" : params.get("composer"),
+      "arranger" : params.get("arranger"),
+      "publisher" : params.get("publisher"),
+      "note" : params.get("note"),
+      "part" : params.getAll("part[]"),
+      "user_id" : params.get("user_id"),
+    }
+    // axiosを使用して非同期にデータを取得する
+    await axios.patch("/api/score/" + id, requestBody).then(() => {
       useRouter.push(LINK_DATA.HOME_LINK);
-    });
+    });    
   } catch (error) {
     // エラーハンドリング
-    console.error("Error fetching data in useScoreCreate:", error);
+    console.error("Error fetching data in useScoreStore:", error);
     throw error; // エラーを再スローする
   }
 }
 
-// 削除するScore取得
+// Scoreを削除する
 export async function useScoreDestroy(
   id: number | number[] | undefined,
   useRouter: NextRouter
@@ -74,7 +100,7 @@ export async function useScoreDestroy(
     });
   } catch (error) {
     // エラーハンドリング
-    console.error("Error fetching data in :", error);
+    console.error("Error fetching data in useScoreDestroy:", error);
     throw error; // エラーを再スローする
   }
 }
