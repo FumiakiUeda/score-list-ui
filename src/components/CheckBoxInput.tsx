@@ -24,9 +24,11 @@ export function CheckBoxInput(props: Props) {
                     type="checkbox"
                     className="h-4 w-4 rounded border-neutral-600 text-indigo-600 focus:ring-neutral-700"
                     value={index}
-                    defaultChecked={props.value.some(
-                      (item) => item.part_id === index
-                    )}
+                    defaultChecked={
+                      props.value
+                        ? props.value.some((item) => item.part_id === index)
+                        : false
+                    }
                   />
                 </div>
                 <div className="text-sm leading-6">
