@@ -1,6 +1,7 @@
 import axios from "@/lib/axios";
 import { NextRouter } from "next/router";
 import { LINK_DATA } from "@/constants/linkdata";
+import { PER_PAGE } from "@/constants/scoredata";
 
 interface Score {
   id: number;
@@ -19,7 +20,9 @@ export async function useScoreList(
 ): Promise<any> {
   try {
     // axiosを使用して非同期にデータを取得する
-    const response = await axios.get("/api/scores/5?page=" + page);
+    const response = await axios.get(
+      "/api/scores/" + PER_PAGE + "?page=" + page
+    );
     // レスポンスのデータを戻り値として返す
     setScores(response.data);
   } catch (error) {
@@ -69,18 +72,18 @@ export async function useScoreStore(
   try {
     // 送信するパラメータを構築
     const requestBody = {
-      "name" : params.get("name"),
-      "composer" : params.get("composer"),
-      "arranger" : params.get("arranger"),
-      "publisher" : params.get("publisher"),
-      "note" : params.get("note"),
-      "part" : params.getAll("part[]"),
-      "user_id" : params.get("user_id"),
-    }
+      name: params.get("name"),
+      composer: params.get("composer"),
+      arranger: params.get("arranger"),
+      publisher: params.get("publisher"),
+      note: params.get("note"),
+      part: params.getAll("part[]"),
+      user_id: params.get("user_id"),
+    };
     // axiosを使用して非同期にデータを取得する
     await axios.patch("/api/score/" + id, requestBody).then(() => {
       useRouter.push(LINK_DATA.HOME_LINK);
-    });    
+    });
   } catch (error) {
     // エラーハンドリング
     console.error("Error fetching data in useScoreStore:", error);

@@ -29,3 +29,9 @@ export const PUBLISHERS = [
   "Winds Score",
   "その他",
 ];
+
+/**
+ * スコアの1ページあたりの表示数
+ * @type {string[]}
+ */
+export const PER_PAGE = 5;

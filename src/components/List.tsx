@@ -21,10 +21,23 @@ interface Score {
   part: { part_id: number }[];
 }
 
+interface User {
+  user?: UserObj;
+}
+
+type UserObj = {
+  id: number;
+  name: string;
+  email: string;
+  email_verified_at: string;
+  created_at: string;
+  updated_at: string;
+};
+
 const parts = PART_NAME;
 const publishers = PUBLISHERS;
 
-export function List() {
+export function List({ user }: User) {
   const router = useRouter();
   const [scores, setScores] = useState(null);
 
@@ -47,6 +60,9 @@ export function List() {
 
   if (!scores) {
     return <Loading />;
+  }
+  if (scores.total == 0) {
+    return <p className="text-gray-400">表示する譜面がありません。</p>;
   }
   return (
     <div className="w-full overflow-x-auto">

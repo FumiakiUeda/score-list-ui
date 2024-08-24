@@ -22,7 +22,7 @@ export function CheckBoxInput(props: Props) {
                     id={option}
                     name={props.input + []}
                     type="checkbox"
-                    className="h-4 w-4 rounded border-neutral-600 text-indigo-600 focus:ring-neutral-700"
+                    className="h-4 w-4 rounded border-neutral-600 text-lime-600 focus:ring-neutral-700"
                     value={index}
                     defaultChecked={
                       props.value

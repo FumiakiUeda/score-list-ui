@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={APP_DATA.LOCALE}>
+    <html lang={APP_DATA.LOCALE} className="dark">
       <body
         className={notojp.className + " dark:text-white dark:bg-neutral-900"}
       >

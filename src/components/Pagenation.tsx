@@ -75,13 +75,13 @@ export function Pagenation(props: Props) {
                   }
                   key={link.label}
                 >
-                  {link.label === "&laquo; Previous" ? (
+                  {link.label === "&laquo; 前" ? (
                     <FontAwesomeIcon
                       icon={faChevronLeft}
                       className="h-4 w-4"
                       aria-hidden="true"
                     />
-                  ) : link.label === "Next &raquo;" ? (
+                  ) : link.label === "次 &raquo;" ? (
                     <FontAwesomeIcon
                       icon={faChevronRight}
                       className="h-4 w-4"

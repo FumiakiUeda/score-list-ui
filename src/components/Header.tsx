@@ -6,15 +6,30 @@ import { Fragment } from "react";
 import { usePathname } from "next/navigation";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "@/hooks/auth";
 import { APP_DATA } from "@/constants/appdata";
 import { LINK_DATA } from "@/constants/linkdata";
+
+interface User {
+  user?: UserObj;
+}
+
+type UserObj = {
+  id: number;
+  name: string;
+  email: string;
+  email_verified_at: string;
+  created_at: string;
+  updated_at: string;
+};
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function Header() {
+export function Header({ user }: User) {
+  const { logout } = useAuth({ middleware: "auth" });
   const pathname = usePathname();
 
   return (
@@ -50,14 +65,13 @@ export function Header() {
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">
                 <div>
-                  <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <Menu.Button className="relative block px-2 py-1 rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-5 focus:ring-offset-gray-800">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
+                    <div>
+                      <FontAwesomeIcon icon={faUser} className="mr-2" />
+                      {user?.name}
+                    </div>
                   </Menu.Button>
                 </div>
                 <Transition
@@ -69,17 +83,17 @@ export function Header() {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                       {({ active }) => (
                         <a
                           href="#"
                           className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
+                            active ? "bg-gray-600" : "",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
-                          Your Profile
+                          プロフィール
                         </a>
                       )}
                     </Menu.Item>
@@ -88,11 +102,11 @@ export function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
+                            active ? "bg-gray-600" : "",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
-                          Settings
+                          設定
                         </a>
                       )}
                     </Menu.Item>
@@ -101,11 +115,12 @@ export function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
+                            active ? "bg-gray-600" : "",
+                            "block px-4 py-2 text-sm"
                           )}
+                          onClick={logout}
                         >
-                          Sign out
+                          サインアウト
                         </a>
                       )}
                     </Menu.Item>

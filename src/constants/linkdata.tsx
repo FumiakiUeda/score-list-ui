@@ -3,7 +3,10 @@
  * @type {Object}
  */
 export const LINK_DATA = {
-  HOME_LINK: "/",
+  ROOT_LINK: "/",
+  HOME_LINK: "/dashboard",
   NEW_LINK: "/new",
   EDIT_LINK: "/edit/",
+  LOGIN_LINK: "/login",
+  REGISTER_LINK: "/register",
 };
