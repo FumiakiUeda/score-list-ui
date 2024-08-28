@@ -27,6 +27,7 @@ export const PUBLISHERS = [
   "ブレーン",
   "New Sounds in Brass",
   "Winds Score",
+  "De Haske",
   "その他",
 ];
 

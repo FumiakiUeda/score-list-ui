@@ -2,12 +2,14 @@
 
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/auth";
 import { useScoreCreate } from "@/hooks/backend";
 import { Header } from "@/components/Header";
 import { Heading } from "@/components/Heading";
 import { CreateForm } from "@/components/CreateForm";
 
 export default function Home() {
+  const { user } = useAuth();
   const router = useRouter();
 
   // クリックでフォーム内容を送信
@@ -20,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header user={user} />
       <main className="flex flex-col justify-between px-6 py-6 mx-auto max-w-4xl lg:px-8">
         <Heading sectionName={"譜面を追加"} />
         <div className="w-full">

@@ -3,6 +3,7 @@
 import { FormEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/hooks/auth";
 import { useScoreEdit, useScoreStore } from "@/hooks/backend";
 import { Header } from "@/components/Header";
 import { Heading } from "@/components/Heading";
@@ -10,6 +11,7 @@ import { Loading } from "@/components/Loading";
 import { CreateForm } from "@/components/CreateForm";
 
 export default function Home() {
+  const { user } = useAuth();
   const params = useParams();
   const router = useRouter();
   const [score, setScore] = useState(null);
@@ -28,7 +30,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header user={user} />
       <main className="flex flex-col justify-between px-6 py-6 mx-auto max-w-4xl lg:px-8">
         <Heading sectionName={"譜面を編集"} />
         <div className="w-full">
