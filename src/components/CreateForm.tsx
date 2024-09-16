@@ -77,7 +77,7 @@ export function CreateForm(props: Props) {
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <Link
           href={LINK_DATA.HOME_LINK}
-          className="text-sm font-semibold leading-6 text-neutral-400"
+          className="text-sm font-semibold leading-6 text-neutral-400 hover:text-gray-300"
         >
           キャンセル
         </Link>

@@ -1,5 +1,5 @@
 import axios from "@/lib/axios";
-import { NextRouter } from "next/router";
+import { AppRouterInstance } from "next/navigation";
 import { LINK_DATA } from "@/constants/linkdata";
 import { PER_PAGE } from "@/constants/scoredata";
 
@@ -33,7 +33,10 @@ export async function useScoreList(
 }
 
 // 新規Score保存
-export async function useScoreCreate(params: FormData, useRouter: NextRouter) {
+export async function useScoreCreate(
+  params: FormData,
+  useRouter: AppRouterInstance
+) {
   try {
     // axiosを使用して非同期にデータを送信する
     await axios.post("/api/score", params).then(() => {
@@ -67,7 +70,7 @@ export async function useScoreEdit(
 export async function useScoreStore(
   id: number | number[] | undefined,
   params: FormData,
-  useRouter: NextRouter
+  useRouter: AppRouterInstance
 ) {
   try {
     // 送信するパラメータを構築
@@ -80,7 +83,7 @@ export async function useScoreStore(
       part: params.getAll("part[]"),
       user_id: params.get("user_id"),
     };
-    // axiosを使用して非同期にデータを取得する
+    // axiosを使用して非同期にデータを送信する
     await axios.patch("/api/score/" + id, requestBody).then(() => {
       useRouter.push(LINK_DATA.HOME_LINK);
     });
@@ -94,12 +97,14 @@ export async function useScoreStore(
 // Scoreを削除する
 export async function useScoreDestroy(
   id: number | number[] | undefined,
-  useRouter: NextRouter
+  useRouter: AppRouterInstance,
+  pageNum: string
 ) {
   try {
-    // axiosを使用して非同期にデータを取得する
+    // axiosを使用して非同期にデータを送信する
     await axios.delete("/api/score/" + id).then(() => {
-      useRouter.push(LINK_DATA.HOME_LINK);
+      useRouter.push(LINK_DATA.HOME_LINK + "?page=" + pageNum);
+      useRouter.refresh();
     });
   } catch (error) {
     // エラーハンドリング

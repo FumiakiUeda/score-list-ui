@@ -1,14 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { PART_NAME, PUBLISHERS } from "@/constants/scoredata";
 import { LINK_DATA } from "@/constants/linkdata";
-import { useScoreDestroy, useScoreList } from "@/hooks/backend";
+import { useScoreList } from "@/hooks/backend";
 import { Pagenation } from "@/components/Pagenation";
 import { Loading } from "@/components/Loading";
+import { ExclamationModal } from "@/components/ExclamationModal";
 import Link from "next/link";
 
 interface Score {
@@ -38,7 +39,6 @@ const parts = PART_NAME;
 const publishers = PUBLISHERS;
 
 export function List({ user }: User) {
-  const router = useRouter();
   const [scores, setScores] = useState(null);
 
   // ページ番号をクエリから取得
@@ -50,13 +50,14 @@ export function List({ user }: User) {
     useScoreList(setScores, pageNum);
   }, [pageNum]);
 
-  // クリックした譜面を削除
-  const handleDelete = useCallback(async (id: number) => {
-    await useScoreDestroy(id, router);
-    useScoreList(setScores);
-  }, []);
-
   const scoreLength = scores ? scores.total : 0;
+
+  // モーダル開閉状態
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // モーダルに渡すスコアID
+  const [modalScoreId, setModalScoreId] = useState(0);
+  // モーダルに渡すスコア名
+  const [modalScoreName, setModalScoreName] = useState("");
 
   if (!scores) {
     return <Loading />;
@@ -102,6 +103,7 @@ export function List({ user }: User) {
                     <Link
                       href={LINK_DATA.EDIT_LINK + score.id}
                       className="px-1.5 py-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white"
+                      title="編集"
                     >
                       <FontAwesomeIcon icon={faPenToSquare} />
                     </Link>
@@ -109,8 +111,11 @@ export function List({ user }: User) {
                       href="#"
                       className="px-1.5 py-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white"
                       onClick={() => {
-                        handleDelete(score.id);
+                        setModalScoreId(score.id);
+                        setModalScoreName(score.name);
+                        setModalIsOpen(true);
                       }}
+                      title="削除"
                     >
                       <FontAwesomeIcon icon={faTrashCan} />
                     </a>
@@ -132,6 +137,7 @@ export function List({ user }: User) {
         </tbody>
       </table>
       <Pagenation total={scoreLength} data={scores} />
+      <ExclamationModal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} scoreId={modalScoreId} scoreName={modalScoreName} pageNum={pageNum} />
     </div>
   );
 }
