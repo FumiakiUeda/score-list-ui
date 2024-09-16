@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/auth";
@@ -15,17 +16,20 @@ export default function Home() {
   const params = useParams();
   const router = useRouter();
   const [score, setScore] = useState(null);
+  // ページ番号をクエリから取得
+  const searchParams = useSearchParams();
+  const pageNum = searchParams.get("page") == null ? 1 : searchParams.get("page");
 
   useEffect(() => {
     useScoreEdit(params.id, setScore);
   }, [params.id]);
-  
+
   // クリックでフォーム内容を送信
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.append("user_id", "1");
-    useScoreStore(params.id, formData, router);
+    useScoreStore(params.id, formData, router, pageNum);
   };
 
   return (

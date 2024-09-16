@@ -101,7 +101,7 @@ export function List({ user }: User) {
                   <div>{score.name}</div>
                   <div className="mt-2">
                     <Link
-                      href={LINK_DATA.EDIT_LINK + score.id}
+                      href={LINK_DATA.EDIT_LINK + score.id + '?page=' + pageNum}
                       className="px-1.5 py-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white"
                       title="編集"
                     >

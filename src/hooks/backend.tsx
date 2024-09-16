@@ -70,7 +70,8 @@ export async function useScoreEdit(
 export async function useScoreStore(
   id: number | number[] | undefined,
   params: FormData,
-  useRouter: AppRouterInstance
+  useRouter: AppRouterInstance,
+  pageNum: string
 ) {
   try {
     // 送信するパラメータを構築
@@ -85,7 +86,7 @@ export async function useScoreStore(
     };
     // axiosを使用して非同期にデータを送信する
     await axios.patch("/api/score/" + id, requestBody).then(() => {
-      useRouter.push(LINK_DATA.HOME_LINK);
+      useRouter.push(LINK_DATA.HOME_LINK + '?page=' + pageNum);
     });
   } catch (error) {
     // エラーハンドリング
