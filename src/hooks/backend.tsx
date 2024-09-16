@@ -2,6 +2,7 @@ import axios from "@/lib/axios";
 import { AppRouterInstance } from "next/navigation";
 import { LINK_DATA } from "@/constants/linkdata";
 import { PER_PAGE } from "@/constants/scoredata";
+import { toast, Bounce } from "react-toastify";
 
 interface Score {
   id: number;
@@ -41,6 +42,18 @@ export async function useScoreCreate(
     // axiosを使用して非同期にデータを送信する
     await axios.post("/api/score", params).then(() => {
       useRouter.push(LINK_DATA.HOME_LINK);
+      // トースト表示
+      toast.success("追加しました", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   } catch (error) {
     // エラーハンドリング
@@ -86,7 +99,19 @@ export async function useScoreStore(
     };
     // axiosを使用して非同期にデータを送信する
     await axios.patch("/api/score/" + id, requestBody).then(() => {
-      useRouter.push(LINK_DATA.HOME_LINK + '?page=' + pageNum);
+      useRouter.push(LINK_DATA.HOME_LINK + "?page=" + pageNum);
+      // トースト表示
+      toast.success("更新しました", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   } catch (error) {
     // エラーハンドリング
@@ -106,6 +131,18 @@ export async function useScoreDestroy(
     await axios.delete("/api/score/" + id).then(() => {
       useRouter.push(LINK_DATA.HOME_LINK + "?page=" + pageNum);
       useRouter.refresh();
+      // トースト表示
+      toast.success("削除しました", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     });
   } catch (error) {
     // エラーハンドリング

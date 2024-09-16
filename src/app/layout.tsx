@@ -4,6 +4,8 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { APP_DATA } from "@/constants/appdata";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.css";
+import { ToastContainer, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const notojp = Noto_Sans_JP({
   weight: ["400", "700"],
@@ -29,6 +31,20 @@ export default function RootLayout({
         className={notojp.className + " dark:text-white dark:bg-neutral-900"}
       >
         {children}
+        {/* トースト表示 */}
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+        />
       </body>
     </html>
   );
