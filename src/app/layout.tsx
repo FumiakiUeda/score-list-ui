@@ -26,9 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={APP_DATA.LOCALE} className="dark">
+    <html lang={APP_DATA.LOCALE}>
       <body
-        className={notojp.className + " dark:text-white dark:bg-neutral-900"}
+        className={notojp.className + " text-white bg-neutral-900"}
       >
         {children}
         {/* トースト表示 */}

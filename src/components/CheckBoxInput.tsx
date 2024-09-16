@@ -11,7 +11,7 @@ export function CheckBoxInput(props: Props) {
     <div className={props.class}>
       <div className="mt-1 space-y-10">
         <fieldset>
-          <legend className="text-sm font-semibold leading-6 text-neutral-500 dark:text-neutral-400">
+          <legend className="text-sm font-semibold leading-6 text-neutral-400">
             {props.label}
           </legend>
           <div className="mt-2 flex flex-wrap">
@@ -34,7 +34,7 @@ export function CheckBoxInput(props: Props) {
                 <div className="text-sm leading-6">
                   <label
                     htmlFor={option}
-                    className="font-medium dark:text-neutral-400"
+                    className="font-medium text-neutral-400"
                   >
                     {option}
                   </label>

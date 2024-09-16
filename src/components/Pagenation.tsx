@@ -37,13 +37,13 @@ export function Pagenation(props: Props) {
       <div className="flex flex-1 justify-between sm:hidden">
         <a
           href="#"
-          className="relative inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-neutral-950 dark:hover:text-white-white"
+          className="relative inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-white-white"
         >
           Previous
         </a>
         <a
           href="#"
-          className="relative ml-3 inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-neutral-950 dark:hover:text-white-white"
+          className="relative ml-3 inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-white-white"
         >
           Next
         </a>
@@ -70,8 +70,8 @@ export function Pagenation(props: Props) {
                   aria-current="page"
                   className={
                     link.active
-                      ? "relative z-10 inline-flex items-center px-4 py-2 text-sm font-semibold dark:text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400"
-                      : "relative hidden items-center px-4 py-2 text-sm font-semibold text-neutral-400 hover:text-neutral-950 dark:hover:text-white focus:z-20 focus:outline-offset-0 md:inline-flex"
+                      ? "relative z-10 inline-flex items-center px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400"
+                      : "relative hidden items-center px-4 py-2 text-sm font-semibold text-neutral-400 hover:text-white focus:z-20 focus:outline-offset-0 md:inline-flex"
                   }
                   key={link.label}
                 >

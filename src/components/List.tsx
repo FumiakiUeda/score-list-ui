@@ -69,7 +69,7 @@ export function List({ user }: User) {
     <div className="w-full overflow-x-auto">
       <table className="table-auto w-full">
         <thead>
-          <tr className="border-b border-neautral-200 dark:border-neutral-700 text-left text-neutral-500 dark:text-neutral-400">
+          <tr className="border-b border-neutral-700 text-left text-neutral-400">
             <th scope="col" className="px-3 py-3">
               曲名
             </th>
@@ -94,7 +94,7 @@ export function List({ user }: User) {
           {scores &&
             scores.data.map((score: Score) => (
               <tr
-                className="border-b border-neautral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                className="border-b border-neutral-700 hover:bg-neutral-800"
                 key={score.id}
               >
                 <td className="px-3 py-3">
@@ -102,14 +102,14 @@ export function List({ user }: User) {
                   <div className="mt-2">
                     <Link
                       href={LINK_DATA.EDIT_LINK + score.id + "?page=" + pageNum}
-                      className="px-1.5 py-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white"
+                      className="px-1.5 py-1.5 text-neutral-400 hover:text-white"
                       title="編集"
                     >
                       <FontAwesomeIcon icon={faPenToSquare} />
                     </Link>
                     <a
                       href="#"
-                      className="px-1.5 py-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white"
+                      className="px-1.5 py-1.5 text-neutral-400 hover:text-white"
                       onClick={() => {
                         setModalScoreId(score.id);
                         setModalScoreName(score.name);
