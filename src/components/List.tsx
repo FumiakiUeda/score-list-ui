@@ -179,7 +179,7 @@ export function List({ user }: User) {
             ))}
         </tbody>
       </table>
-      <Pagenation total={scoreLength} data={scores} />
+      <Pagenation total={scoreLength} data={scores} sort={sort} order={order} />
       <ExclamationModal
         isOpen={modalIsOpen}
         setIsOpen={setModalIsOpen}

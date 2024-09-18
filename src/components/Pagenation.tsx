@@ -7,7 +7,14 @@ import {
 
 type Props = {
   total: number;
-  data: object;
+  data: Data;
+  sort: string;
+  order: string;
+};
+
+type Data = {
+  from: number;
+  to: number;
 };
 
 interface Link {
@@ -16,19 +23,19 @@ interface Link {
   url: string;
 }
 
-function extractQueryParam(url: string) {
+function extractQueryParam(url: string, sort: string, order: string) {
   if (url) {
     const urlObj = new URL(url);
     const queryParams = new URLSearchParams(urlObj.search);
-    return "?page=" + queryParams.get("page");
+    return (
+      "?page=" + queryParams.get("page") + "&sort=" + sort + "&order=" + order
+    );
   } else {
     return "#";
   }
 }
 
 export function Pagenation(props: Props) {
-  const perPage = props.data.per_page;
-  const page = props.data.current_page;
   const startIndex = props.data.from;
   const endIndex = props.data.to;
 
@@ -65,7 +72,9 @@ export function Pagenation(props: Props) {
               props.data.links.map((link: Link) => (
                 <Link
                   href={
-                    !link.active && link.url ? extractQueryParam(link.url) : "#"
+                    !link.active && link.url
+                      ? extractQueryParam(link.url, props.sort, props.order)
+                      : "#"
                   }
                   aria-current="page"
                   className={
