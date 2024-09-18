@@ -17,12 +17,21 @@ interface Score {
 // Score一覧取得
 export async function useScoreList(
   setScores: React.Dispatch<React.SetStateAction<any>>,
-  page: number = 1
+  page: string,
+  sort: string,
+  order: string
 ): Promise<any> {
   try {
     // axiosを使用して非同期にデータを取得する
     const response = await axios.get(
-      "/api/scores/" + PER_PAGE + "?page=" + page
+      "/api/scores/" +
+        PER_PAGE +
+        "?page=" +
+        page +
+        "&sort=" +
+        sort +
+        "&order=" +
+        order
     );
     // レスポンスのデータを戻り値として返す
     setScores(response.data);

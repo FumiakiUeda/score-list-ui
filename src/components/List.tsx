@@ -41,14 +41,16 @@ const publishers = PUBLISHERS;
 export function List({ user }: User) {
   const [scores, setScores] = useState(null);
 
-  // ページ番号をクエリから取得
+  // ページ番号や並び替え情報をクエリから取得
   const searchParams = useSearchParams();
-  const pageNum = searchParams.get("page");
+  const pageNum = searchParams.get("page") || "1";
+  const sort = searchParams.get("sort") || "id";
+  const order = searchParams.get("order") || "desc";
 
   // スコアリストを取得してscoresを更新
   useEffect(() => {
-    useScoreList(setScores, pageNum);
-  }, [pageNum]);
+    useScoreList(setScores, pageNum, sort, order);
+  }, [pageNum, sort, order]);
 
   const scoreLength = scores ? scores.total : 0;
 
@@ -70,22 +72,63 @@ export function List({ user }: User) {
       <table className="table-auto w-full">
         <thead>
           <tr className="border-b border-neutral-700 text-left text-neutral-400">
-            <th scope="col" className="px-3 py-3">
-              曲名
+            <th scope="col" className="px-3 py-3 w-5/12">
+              <Link
+                href={
+                  sort == "name" && order == "asc"
+                    ? "?sort=name&order=desc"
+                    : "?sort=name&order=asc"
+                }
+                className="hover:text-white"
+                title="曲名"
+              >
+                曲名{sort == "name" ? (order == "asc" ? " ▲" : " ▼") : ""}
+              </Link>
             </th>
-            <th scope="col" className="px-3 py-3">
-              作曲者
+            <th scope="col" className="px-3 py-3 w-1/12">
+              <Link
+                href={
+                  sort == "composer" && order == "asc"
+                    ? "?sort=composer&order=desc"
+                    : "?sort=composer&order=asc"
+                }
+                className="hover:text-white"
+                title="作曲者"
+              >
+                作曲者{sort == "composer" ? (order == "asc" ? " ▲" : " ▼") : ""}
+              </Link>
             </th>
-            <th scope="col" className="px-3 py-3">
-              編曲者
+            <th scope="col" className="px-3 py-3 w-1/12">
+              <Link
+                href={
+                  sort == "arranger" && order == "asc"
+                    ? "?sort=arranger&order=desc"
+                    : "?sort=arranger&order=asc"
+                }
+                className="hover:text-white"
+                title="編曲者"
+              >
+                編曲者{sort == "arranger" ? (order == "asc" ? " ▲" : " ▼") : ""}
+              </Link>
             </th>
-            <th scope="col" className="px-3 py-3">
-              出版社
+            <th scope="col" className="px-3 py-3 w-1/12">
+              <Link
+                href={
+                  sort == "publisher" && order == "asc"
+                    ? "?sort=publisher&order=desc"
+                    : "?sort=publisher&order=asc"
+                }
+                className="hover:text-white"
+                title="出版社"
+              >
+                出版社
+                {sort == "publisher" ? (order == "asc" ? " ▲" : " ▼") : ""}
+              </Link>
             </th>
-            <th scope="col" className="px-3 py-3">
+            <th scope="col" className="px-3 py-3 w-2/12">
               備考
             </th>
-            <th scope="col" className="px-3 py-3">
+            <th scope="col" className="px-3 py-3 w-2/12">
               不足パート譜
             </th>
           </tr>
