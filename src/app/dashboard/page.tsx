@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/auth";
 import { Header } from "@/components/Header";
 import { Heading } from "@/components/Heading";
 import { List } from "@/components/List";
+import { SearchForm } from "@/components/SearchForm";
 
 export default function Home() {
   const { user } = useAuth({
@@ -17,6 +18,7 @@ export default function Home() {
       <main className="flex flex-col justify-between px-4 py-5 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <>
           <Heading sectionName={"譜面一覧"} />
+          <SearchForm />
           <div className="w-full">
             <List user={user} />
           </div>

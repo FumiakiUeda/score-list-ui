@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { PART_NAME, PUBLISHERS } from "@/constants/scoredata";
@@ -43,14 +43,34 @@ export function List({ user }: User) {
 
   // ページ番号や並び替え情報をクエリから取得
   const searchParams = useSearchParams();
-  const pageNum = searchParams.get("page") || "1";
+  const pageNum = parseInt(searchParams.get("page") || "1");
   const sort = searchParams.get("sort") || "id";
   const order = searchParams.get("order") || "desc";
+  const query = searchParams.get("query") || "";
+
+  // const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleSort = (sort: string, order: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+    if (sort) {
+      params.set("sort", sort);
+      params.set("order", order);
+      query && params.set("query", query);
+    } else {
+      params.delete("sort");
+      params.delete("order");
+    }
+    replace(`${pathname}?${params.toString()}`);
+    console.log(params);
+  };
 
   // スコアリストを取得してscoresを更新
   useEffect(() => {
-    useScoreList(setScores, pageNum, sort, order);
-  }, [pageNum, sort, order]);
+    useScoreList(setScores, pageNum, sort, order, query);
+  }, [pageNum, sort, order, query]);
 
   const scoreLength = scores ? scores.total : 0;
 
@@ -73,57 +93,57 @@ export function List({ user }: User) {
         <thead>
           <tr className="border-b border-neutral-700 text-left text-neutral-400">
             <th scope="col" className="px-3 py-3 w-5/12">
-              <Link
-                href={
-                  sort == "name" && order == "asc"
-                    ? "?sort=name&order=desc"
-                    : "?sort=name&order=asc"
-                }
-                className="hover:text-white"
+              <span
+                className="hover:text-white cursor-pointer"
                 title="曲名"
+                onClick={() => {
+                  sort == "name" && order == "asc"
+                    ? handleSort("name", "desc")
+                    : handleSort("name", "asc");
+                }}
               >
                 曲名{sort == "name" ? (order == "asc" ? " ▲" : " ▼") : ""}
-              </Link>
+              </span>
             </th>
             <th scope="col" className="px-3 py-3 w-1/12">
-              <Link
-                href={
-                  sort == "composer" && order == "asc"
-                    ? "?sort=composer&order=desc"
-                    : "?sort=composer&order=asc"
-                }
-                className="hover:text-white"
+              <span
+                className="hover:text-white cursor-pointer"
                 title="作曲者"
+                onClick={() => {
+                  sort == "composer" && order == "asc"
+                    ? handleSort("composer", "desc")
+                    : handleSort("composer", "asc");
+                }}
               >
                 作曲者{sort == "composer" ? (order == "asc" ? " ▲" : " ▼") : ""}
-              </Link>
+              </span>
             </th>
             <th scope="col" className="px-3 py-3 w-1/12">
-              <Link
-                href={
-                  sort == "arranger" && order == "asc"
-                    ? "?sort=arranger&order=desc"
-                    : "?sort=arranger&order=asc"
-                }
-                className="hover:text-white"
+              <span
+                className="hover:text-white cursor-pointer"
                 title="編曲者"
+                onClick={() => {
+                  sort == "arranger" && order == "asc"
+                    ? handleSort("arranger", "desc")
+                    : handleSort("arranger", "asc");
+                }}
               >
                 編曲者{sort == "arranger" ? (order == "asc" ? " ▲" : " ▼") : ""}
-              </Link>
+              </span>
             </th>
             <th scope="col" className="px-3 py-3 w-1/12">
-              <Link
-                href={
-                  sort == "publisher" && order == "asc"
-                    ? "?sort=publisher&order=desc"
-                    : "?sort=publisher&order=asc"
-                }
-                className="hover:text-white"
+              <span
+                className="hover:text-white cursor-pointer"
                 title="出版社"
+                onClick={() => {
+                  sort == "publisher" && order == "asc"
+                    ? handleSort("publisher", "desc")
+                    : handleSort("publisher", "asc");
+                }}
               >
                 出版社
                 {sort == "publisher" ? (order == "asc" ? " ▲" : " ▼") : ""}
-              </Link>
+              </span>
             </th>
             <th scope="col" className="px-3 py-3 w-2/12">
               備考

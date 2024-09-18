@@ -1,4 +1,3 @@
-
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +10,7 @@ interface ExclamationModalProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   scoreId: number;
   scoreName: string;
-  pageNum: string;
+  pageNum: number;
 }
 
 // モーダル用カスタマイズスタイル
@@ -24,8 +23,8 @@ const customStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
-    border: '1px solid #000',
-    background: '#000',
+    border: "1px solid #000",
+    background: "#000",
     marginRight: "-50%",
     padding: "0",
     transform: "translate(-50%, -50%)",
@@ -38,10 +37,16 @@ const customStyles = {
 
 Modal.setAppElement("body");
 
-export function ExclamationModal({ isOpen, setIsOpen, scoreId, scoreName, pageNum }: ExclamationModalProps) {
+export function ExclamationModal({
+  isOpen,
+  setIsOpen,
+  scoreId,
+  scoreName,
+  pageNum,
+}: ExclamationModalProps) {
   const router = useRouter();
   // クリックした譜面を削除
-  const handleDelete = useCallback(async (id: number, page: string) => {
+  const handleDelete = useCallback(async (id: number, page: number) => {
     await useScoreDestroy(id, router, page);
     await router.refresh();
   }, []);
@@ -74,7 +79,9 @@ export function ExclamationModal({ isOpen, setIsOpen, scoreId, scoreName, pageNu
             </h3>
             <div className="mt-2">
               <p className="text-sm text-neutral-300">
-                「{scoreName}」を削除してもよろしいですか？<br />（この操作は元に戻せません。）
+                「{scoreName}」を削除してもよろしいですか？
+                <br />
+                （この操作は元に戻せません。）
               </p>
             </div>
           </div>
@@ -83,7 +90,8 @@ export function ExclamationModal({ isOpen, setIsOpen, scoreId, scoreName, pageNu
       <div className="bg-gray-600 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
         <button
           type="button"
-          onClick={() => {setIsOpen(false)
+          onClick={() => {
+            setIsOpen(false);
             handleDelete(scoreId, pageNum);
           }}
           className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"

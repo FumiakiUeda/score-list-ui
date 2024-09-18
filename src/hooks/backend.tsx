@@ -17,22 +17,21 @@ interface Score {
 // Score一覧取得
 export async function useScoreList(
   setScores: React.Dispatch<React.SetStateAction<any>>,
-  page: string,
+  page: number,
   sort: string,
-  order: string
+  order: string,
+  query: string
 ): Promise<any> {
   try {
     // axiosを使用して非同期にデータを取得する
-    const response = await axios.get(
-      "/api/scores/" +
-        PER_PAGE +
-        "?page=" +
-        page +
-        "&sort=" +
-        sort +
-        "&order=" +
-        order
-    );
+    const response = await axios.get("/api/scores/" + PER_PAGE, {
+      params: {
+        page: page,
+        sort: sort,
+        order: order,
+        search: query,
+      },
+    });
     // レスポンスのデータを戻り値として返す
     setScores(response.data);
   } catch (error) {
@@ -93,7 +92,7 @@ export async function useScoreStore(
   id: number | number[] | undefined,
   params: FormData,
   useRouter: AppRouterInstance,
-  pageNum: string
+  pageNum: number
 ) {
   try {
     // 送信するパラメータを構築
@@ -108,7 +107,10 @@ export async function useScoreStore(
     };
     // axiosを使用して非同期にデータを送信する
     await axios.patch("/api/score/" + id, requestBody).then(() => {
-      useRouter.push(LINK_DATA.HOME_LINK + "?page=" + pageNum);
+      useRouter.push({
+        pathname: LINK_DATA.HOME_LINK,
+        query: { page: pageNum },
+      });
       // トースト表示
       toast.success("更新しました", {
         position: "bottom-left",
@@ -133,12 +135,15 @@ export async function useScoreStore(
 export async function useScoreDestroy(
   id: number | number[] | undefined,
   useRouter: AppRouterInstance,
-  pageNum: string
+  pageNum: number
 ) {
   try {
     // axiosを使用して非同期にデータを送信する
     await axios.delete("/api/score/" + id).then(() => {
-      useRouter.push(LINK_DATA.HOME_LINK + "?page=" + pageNum);
+      useRouter.push({
+        pathname: LINK_DATA.HOME_LINK,
+        query: { page: pageNum },
+      });
       useRouter.refresh();
       // トースト表示
       toast.success("削除しました", {

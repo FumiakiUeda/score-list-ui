@@ -18,7 +18,7 @@ export default function Home() {
   const [score, setScore] = useState(null);
   // ページ番号をクエリから取得
   const searchParams = useSearchParams();
-  const pageNum = searchParams.get("page") == null ? 1 : searchParams.get("page");
+  const pageNum = parseInt(searchParams.get("page") || "1");
 
   useEffect(() => {
     useScoreEdit(params.id, setScore);
