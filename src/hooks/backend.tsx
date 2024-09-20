@@ -24,8 +24,9 @@ export async function useScoreList(
 ): Promise<any> {
   try {
     // axiosを使用して非同期にデータを取得する
-    const response = await axios.get("/api/scores/" + PER_PAGE, {
+    const response = await axios.get("/api/scores", {
       params: {
+        per_page: PER_PAGE,
         page: page,
         sort: sort,
         order: order,

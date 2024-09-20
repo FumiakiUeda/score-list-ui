@@ -80,7 +80,9 @@ export function Pagenation(props: Props) {
                   className={
                     link.active
                       ? "relative z-10 inline-flex items-center px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400"
-                      : "relative hidden items-center px-4 py-2 text-sm font-semibold text-neutral-400 hover:text-white focus:z-20 focus:outline-offset-0 md:inline-flex"
+                      : link.url
+                      ? "relative hidden items-center px-4 py-2 text-sm font-semibold text-neutral-400 hover:text-white focus:z-20 focus:outline-offset-0 md:inline-flex"
+                      : "relative hidden items-center px-4 py-2 text-sm font-semibold text-neutral-700 md:inline-flex"
                   }
                   key={link.label}
                 >

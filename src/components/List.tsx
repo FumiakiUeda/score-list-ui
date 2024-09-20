@@ -48,23 +48,20 @@ export function List({ user }: User) {
   const order = searchParams.get("order") || "desc";
   const query = searchParams.get("query") || "";
 
-  // const searchParams = useSearchParams();
+  // 並び替えをしても検索クエリを保持する
   const pathname = usePathname();
   const { replace } = useRouter();
-
   const handleSort = (sort: string, order: string) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", "1");
     if (sort) {
       params.set("sort", sort);
       params.set("order", order);
-      query && params.set("query", query);
     } else {
       params.delete("sort");
       params.delete("order");
     }
     replace(`${pathname}?${params.toString()}`);
-    console.log(params);
   };
 
   // スコアリストを取得してscoresを更新
