@@ -1,9 +1,11 @@
 import Link from "next/link";
 import AuthCard from "@/app/(auth)/AuthCard";
 import Image from "next/image";
+import { APP_DATA } from "@/constants/appdata";
 
 export const metadata = {
-  title: "Laravel",
+  title: APP_DATA.APP_NAME,
+  description: APP_DATA.APP_DESCRIPTION,
 };
 
 const Layout = ({ children }) => {
