@@ -41,22 +41,8 @@ export function Pagenation(props: Props) {
 
   return (
     <div className="flex items-center justify-between px-4 py-3 sm:px-6">
-      <div className="flex flex-1 justify-between sm:hidden">
-        <a
-          href="#"
-          className="relative inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-white-white"
-        >
-          Previous
-        </a>
-        <a
-          href="#"
-          className="relative ml-3 inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-white-white"
-        >
-          Next
-        </a>
-      </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
+      <div className="flex flex-1 items-center justify-between">
+        <div className="">
           <p className="text-sm text-neutral-400">
             <span className="font-medium">{props.data.total}</span>件中
             <span className="font-medium">{startIndex}</span>～
@@ -79,10 +65,10 @@ export function Pagenation(props: Props) {
                   aria-current="page"
                   className={
                     link.active
-                      ? "relative z-10 inline-flex items-center px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400"
+                      ? "relative z-10 inline-flex items-center px-3 sm:px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400"
                       : link.url
-                      ? "relative hidden items-center px-4 py-2 text-sm font-semibold text-neutral-400 hover:text-white focus:z-20 focus:outline-offset-0 md:inline-flex"
-                      : "relative hidden items-center px-4 py-2 text-sm font-semibold text-neutral-700 md:inline-flex"
+                      ? "relative items-center px-3 sm:px-4 py-2 text-sm font-semibold text-neutral-400 hover:text-white focus:z-20 focus:outline-offset-0 inline-flex"
+                      : "relative items-center px-3 sm:px-4 py-2 text-sm font-semibold text-neutral-700 inline-flex"
                   }
                   key={link.label}
                 >

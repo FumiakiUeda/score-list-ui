@@ -25,9 +25,9 @@ const customStyles = {
     bottom: "auto",
     border: "1px solid #000",
     background: "#000",
-    marginRight: "-50%",
+    marginRight: "-40%",
     padding: "0",
-    transform: "translate(-50%, -50%)",
+    transform: "translate(-50%, 0)",
     minWidth: "40%",
     maxWidth: "40rem",
     color: "black",
@@ -57,8 +57,6 @@ export function ExclamationModal({
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
       style={customStyles}
-      // className=""
-      // portalClassName="bg-opacity-75 bg-black fixed bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
       contentLabel="モーダル"
       onRequestClose={() => {
         setIsOpen(false);

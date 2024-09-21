@@ -70,7 +70,7 @@ export function Header({ user }: User) {
                     <span className="sr-only">Open user menu</span>
                     <div>
                       <FontAwesomeIcon icon={faUser} className="mr-2" />
-                      {user?.name}
+                      <span className="hidden sm:inline">{user?.name}</span>
                     </div>
                   </Menu.Button>
                 </div>

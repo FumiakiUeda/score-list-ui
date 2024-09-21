@@ -85,125 +85,131 @@ export function List({ user }: User) {
     return <p className="text-gray-400">表示する譜面がありません。</p>;
   }
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="table-auto w-full">
-        <thead>
-          <tr className="border-b border-neutral-700 text-left text-neutral-400">
-            <th scope="col" className="px-3 py-3 w-5/12">
-              <span
-                className="hover:text-white cursor-pointer"
-                title="曲名"
-                onClick={() => {
-                  sort == "name" && order == "asc"
-                    ? handleSort("name", "desc")
-                    : handleSort("name", "asc");
-                }}
-              >
-                曲名{sort == "name" ? (order == "asc" ? " ▲" : " ▼") : ""}
-              </span>
-            </th>
-            <th scope="col" className="px-3 py-3 w-1/12">
-              <span
-                className="hover:text-white cursor-pointer"
-                title="作曲者"
-                onClick={() => {
-                  sort == "composer" && order == "asc"
-                    ? handleSort("composer", "desc")
-                    : handleSort("composer", "asc");
-                }}
-              >
-                作曲者{sort == "composer" ? (order == "asc" ? " ▲" : " ▼") : ""}
-              </span>
-            </th>
-            <th scope="col" className="px-3 py-3 w-1/12">
-              <span
-                className="hover:text-white cursor-pointer"
-                title="編曲者"
-                onClick={() => {
-                  sort == "arranger" && order == "asc"
-                    ? handleSort("arranger", "desc")
-                    : handleSort("arranger", "asc");
-                }}
-              >
-                編曲者{sort == "arranger" ? (order == "asc" ? " ▲" : " ▼") : ""}
-              </span>
-            </th>
-            <th scope="col" className="px-3 py-3 w-1/12">
-              <span
-                className="hover:text-white cursor-pointer"
-                title="出版社"
-                onClick={() => {
-                  sort == "publisher" && order == "asc"
-                    ? handleSort("publisher", "desc")
-                    : handleSort("publisher", "asc");
-                }}
-              >
-                出版社
-                {sort == "publisher" ? (order == "asc" ? " ▲" : " ▼") : ""}
-              </span>
-            </th>
-            <th scope="col" className="px-3 py-3 w-2/12">
-              備考
-            </th>
-            <th scope="col" className="px-3 py-3 w-2/12">
-              不足パート譜
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {scores &&
-            scores.data.map((score: Score) => (
-              <tr
-                className="border-b border-neutral-700 hover:bg-neutral-800"
-                key={score.id}
-              >
-                <td className="px-3 py-3">
-                  <div>{score.name}</div>
-                  <div className="mt-2">
-                    <Link
-                      href={LINK_DATA.EDIT_LINK + score.id + "?page=" + pageNum}
-                      className="px-1.5 py-1.5 text-neutral-400 hover:text-white"
-                      title="編集"
-                    >
-                      <FontAwesomeIcon icon={faPenToSquare} />
-                    </Link>
-                    <a
-                      href="#"
-                      className="px-1.5 py-1.5 text-neutral-400 hover:text-white"
-                      onClick={() => {
-                        setModalScoreId(score.id);
-                        setModalScoreName(score.name);
-                        setModalIsOpen(true);
-                      }}
-                      title="削除"
-                    >
-                      <FontAwesomeIcon icon={faTrashCan} />
-                    </a>
-                  </div>
-                </td>
-                <td className="px-3 py-3">{score.composer}</td>
-                <td className="px-3 py-3">{score.arranger}</td>
-                <td className="px-3 py-3">{publishers[score.publisher]}</td>
-                <td className="px-3 py-3">{score.note}</td>
-                <td className="px-3 py-3">
-                  {score.part
-                    .map((val) => {
-                      return parts[val.part_id];
-                    })
-                    .join(", ")}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+    <div>
+      <div className="w-full overflow-x-auto">
+        <table className="table-auto w-full min-w-[60rem]">
+          <thead>
+            <tr className="border-b border-neutral-700 text-left text-neutral-400">
+              <th scope="col" className="px-3 py-3 w-5/12">
+                <span
+                  className="hover:text-white cursor-pointer"
+                  title="曲名"
+                  onClick={() => {
+                    sort == "name" && order == "asc"
+                      ? handleSort("name", "desc")
+                      : handleSort("name", "asc");
+                  }}
+                >
+                  曲名{sort == "name" ? (order == "asc" ? " ▲" : " ▼") : ""}
+                </span>
+              </th>
+              <th scope="col" className="px-3 py-3 w-1/12">
+                <span
+                  className="hover:text-white cursor-pointer"
+                  title="作曲者"
+                  onClick={() => {
+                    sort == "composer" && order == "asc"
+                      ? handleSort("composer", "desc")
+                      : handleSort("composer", "asc");
+                  }}
+                >
+                  作曲者
+                  {sort == "composer" ? (order == "asc" ? " ▲" : " ▼") : ""}
+                </span>
+              </th>
+              <th scope="col" className="px-3 py-3 w-1/12">
+                <span
+                  className="hover:text-white cursor-pointer"
+                  title="編曲者"
+                  onClick={() => {
+                    sort == "arranger" && order == "asc"
+                      ? handleSort("arranger", "desc")
+                      : handleSort("arranger", "asc");
+                  }}
+                >
+                  編曲者
+                  {sort == "arranger" ? (order == "asc" ? " ▲" : " ▼") : ""}
+                </span>
+              </th>
+              <th scope="col" className="px-3 py-3 w-1/12">
+                <span
+                  className="hover:text-white cursor-pointer"
+                  title="出版社"
+                  onClick={() => {
+                    sort == "publisher" && order == "asc"
+                      ? handleSort("publisher", "desc")
+                      : handleSort("publisher", "asc");
+                  }}
+                >
+                  出版社
+                  {sort == "publisher" ? (order == "asc" ? " ▲" : " ▼") : ""}
+                </span>
+              </th>
+              <th scope="col" className="px-3 py-3 w-2/12">
+                備考
+              </th>
+              <th scope="col" className="px-3 py-3 w-2/12">
+                不足パート譜
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {scores &&
+              scores.data.map((score: Score) => (
+                <tr
+                  className="border-b border-neutral-700 hover:bg-neutral-800"
+                  key={score.id}
+                >
+                  <td className="px-3 py-3">
+                    <div>{score.name}</div>
+                    <div className="mt-2">
+                      <Link
+                        href={
+                          LINK_DATA.EDIT_LINK + score.id + "?page=" + pageNum
+                        }
+                        className="px-1.5 py-1.5 text-neutral-400 hover:text-white"
+                        title="編集"
+                      >
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                      </Link>
+                      <a
+                        href="#"
+                        className="px-1.5 py-1.5 text-neutral-400 hover:text-white"
+                        onClick={() => {
+                          setModalScoreId(score.id);
+                          setModalScoreName(score.name);
+                          setModalIsOpen(true);
+                        }}
+                        title="削除"
+                      >
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </a>
+                    </div>
+                  </td>
+                  <td className="px-3 py-3">{score.composer}</td>
+                  <td className="px-3 py-3">{score.arranger}</td>
+                  <td className="px-3 py-3">{publishers[score.publisher]}</td>
+                  <td className="px-3 py-3">{score.note}</td>
+                  <td className="px-3 py-3">
+                    {score.part
+                      .map((val) => {
+                        return parts[val.part_id];
+                      })
+                      .join(", ")}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        <ExclamationModal
+          isOpen={modalIsOpen}
+          setIsOpen={setModalIsOpen}
+          scoreId={modalScoreId}
+          scoreName={modalScoreName}
+          pageNum={pageNum}
+        />
+      </div>
       <Pagenation total={scoreLength} data={scores} sort={sort} order={order} />
-      <ExclamationModal
-        isOpen={modalIsOpen}
-        setIsOpen={setModalIsOpen}
-        scoreId={modalScoreId}
-        scoreName={modalScoreName}
-        pageNum={pageNum}
-      />
     </div>
   );
 }
