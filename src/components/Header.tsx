@@ -92,32 +92,6 @@ export function Header({ user }: User) {
                             active ? "bg-gray-600" : "",
                             "block px-4 py-2 text-sm"
                           )}
-                        >
-                          プロフィール
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? "bg-gray-600" : "",
-                            "block px-4 py-2 text-sm"
-                          )}
-                        >
-                          設定
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? "bg-gray-600" : "",
-                            "block px-4 py-2 text-sm"
-                          )}
                           onClick={logout}
                         >
                           サインアウト
