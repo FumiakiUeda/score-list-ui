@@ -4,7 +4,7 @@ import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/auth";
 import { useScoreCreate } from "@/hooks/backend";
-import { Header } from "@/components/Header";
+import { Header } from "@/app/(app)/Header";
 import { Heading } from "@/components/Heading";
 import { CreateForm } from "@/components/CreateForm";
 

@@ -1,9 +1,9 @@
 "use client";
 
 import { useAuth } from "@/hooks/auth";
-import { Header } from "@/components/Header";
+import { Header } from "@/app/(app)/Header";
+import { List } from "@/app/(app)/List";
 import { Heading } from "@/components/Heading";
-import { List } from "@/components/List";
 import { SearchForm } from "@/components/SearchForm";
 
 export default function Home() {

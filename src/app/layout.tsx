@@ -1,11 +1,11 @@
+import "@/app/globals.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import { ToastContainer, Bounce } from "react-toastify";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { APP_DATA } from "@/constants/appdata";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import "./globals.css";
-import { ToastContainer, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
 
 const notojp = Noto_Sans_JP({
   weight: ["400", "700"],
@@ -27,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={APP_DATA.LOCALE}>
-      <body
-        className={notojp.className + " text-white bg-neutral-900"}
-      >
+      <body className={notojp.className + " text-white bg-neutral-900"}>
         {children}
         {/* トースト表示 */}
         <ToastContainer

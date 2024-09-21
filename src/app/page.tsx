@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/hooks/auth";
 import { LINK_DATA } from "@/constants/linkdata";
 import { APP_DATA } from "@/constants/appdata";
-import Image from "next/image";
 
 export default function Home() {
   const { user } = useAuth({
@@ -15,7 +15,14 @@ export default function Home() {
     <>
       <main className="flex flex-col justify-between px-4 py-5 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="my-10 text-center">
-          <div className="inline-block pb-4"><Image src="/icon.png" width={54} height={54} alt="アプリアイコン" /></div>
+          <div className="inline-block pb-4">
+            <Image
+              src="/icon.png"
+              width={54}
+              height={54}
+              alt="アプリアイコン"
+            />
+          </div>
           <h1 className="text-2xl font-bold mb-10">{APP_DATA.APP_NAME}</h1>
           <p className="text-gray-400">{APP_DATA.APP_DESCRIPTION}</p>
           <div className="my-12">
@@ -33,9 +40,7 @@ export default function Home() {
               新規登録
             </Link>
           </div>
-          <p className="text-sm text-gray-400">
-            Produced by Fumiaki Ueda
-          </p>
+          <p className="text-sm text-gray-400">Produced by Fumiaki Ueda</p>
         </div>
       </main>
     </>

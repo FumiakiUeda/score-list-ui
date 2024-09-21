@@ -1,16 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { PART_NAME, PUBLISHERS } from "@/constants/scoredata";
-import { LINK_DATA } from "@/constants/linkdata";
 import { useScoreList } from "@/hooks/backend";
 import { Pagenation } from "@/components/Pagenation";
 import { Loading } from "@/components/Loading";
 import { ExclamationModal } from "@/components/ExclamationModal";
-import Link from "next/link";
+import { PART_NAME, PUBLISHERS } from "@/constants/scoredata";
+import { LINK_DATA } from "@/constants/linkdata";
 
 interface Score {
   id: number;
