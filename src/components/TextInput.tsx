@@ -1,13 +1,13 @@
 import { ChangeEventHandler } from "react";
 
-type Props = {
+interface Props {
   class: string;
   label: string;
   input: string;
   value?: string;
   placeholder?: string;
   onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
-};
+}
 
 export function TextInput(props: Props) {
   return (

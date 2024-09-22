@@ -1,10 +1,14 @@
-type Props = {
+interface Props {
   class: string;
   label: string;
   input: string;
   options: string[];
-  value: string[];
-};
+  value?: Array<Value>;
+}
+
+interface Value {
+  part_id: number;
+}
 
 export function CheckBoxInput(props: Props) {
   return (

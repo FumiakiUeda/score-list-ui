@@ -5,17 +5,19 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-type Props = {
-  total: number;
+interface Props {
   data: Data;
   sort: string;
   order: string;
-};
+  total: number;
+}
 
-type Data = {
+interface Data {
   from: number;
   to: number;
-};
+  total: number;
+  links: Array<Link>
+}
 
 interface Link {
   active: boolean;

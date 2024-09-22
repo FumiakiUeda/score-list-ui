@@ -15,14 +15,14 @@ interface User {
   user?: UserObj;
 }
 
-type UserObj = {
+interface UserObj {
   id: number;
   name: string;
   email: string;
   email_verified_at: string;
   created_at: string;
   updated_at: string;
-};
+}
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

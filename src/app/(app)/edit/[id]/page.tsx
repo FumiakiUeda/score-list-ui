@@ -11,11 +11,24 @@ import { Heading } from "@/components/Heading";
 import { Loading } from "@/components/Loading";
 import { CreateForm } from "@/components/CreateForm";
 
+interface Score {
+  id: number;
+  name: string;
+  composer: string;
+  arranger: string;
+  publisher: number;
+  note: string;
+  part: { part_id: number }[];
+  created_at: string;
+  updated_at: string;
+  user_id: number;
+}
+
 export default function Home() {
   const { user } = useAuth();
   const params = useParams();
   const router = useRouter();
-  const [score, setScore] = useState(null);
+  const [score, setScore] = useState<Score | null>(null);
   // ページ番号をクエリから取得
   const searchParams = useSearchParams();
   const pageNum = parseInt(searchParams.get("page") || "1");

@@ -1,8 +1,24 @@
 import axios from "@/lib/axios";
-import { AppRouterInstance } from "next/navigation";
+// import { type AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { LINK_DATA } from "@/constants/linkdata";
 import { PER_PAGE } from "@/constants/scoredata";
 import { toast, Bounce } from "react-toastify";
+
+interface ScoreList {
+  current_page: number;
+  data: Array<Score>;
+  from: number;
+  to: number;
+  links: Array<Links>;
+  prev_page_url: string | null;
+  next_page_url: string | null;
+  first_page_url: string;
+  last_page_url: string;
+  last_page: number;
+  path: string;
+  per_page: number;
+  total: number;
+}
 
 interface Score {
   id: number;
@@ -12,6 +28,25 @@ interface Score {
   publisher: number;
   note: string;
   part: { part_id: number }[];
+  created_at: string;
+  updated_at: string;
+  user_id: number;
+}
+
+interface Links {
+  active: boolean;
+  label: string;
+  url: string;
+}
+
+interface AppRouterInstance {
+  push(href: string, options?: NavigateOptions): void;
+  refresh(): void;
+}
+
+interface NavigateOptions {
+  scroll?: boolean;
+  page: number;
 }
 
 // Score一覧取得
@@ -37,7 +72,7 @@ export async function fetchScoreList(
     setScores(response.data);
   } catch (error) {
     // エラーハンドリング
-    console.error("Error fetching data in useScoreList:", error);
+    console.error("Error fetching data in fetchScoreList:", error);
     throw error; // エラーを再スローする
   }
 }
@@ -66,7 +101,7 @@ export async function sendScoreCreate(
     });
   } catch (error) {
     // エラーハンドリング
-    console.error("Error fetching data in useScoreCreate:", error);
+    console.error("Error fetching data in sendScoreCreate:", error);
     throw error; // エラーを再スローする
   }
 }
@@ -83,7 +118,7 @@ export async function fetchScoreEdit(
     setScore(response.data);
   } catch (error) {
     // エラーハンドリング
-    console.error("Error fetching data in useScoreEdit:", error);
+    console.error("Error fetching data in fetchScoreEdit:", error);
     throw error; // エラーを再スローする
   }
 }
@@ -124,7 +159,7 @@ export async function sendScoreStore(
     });
   } catch (error) {
     // エラーハンドリング
-    console.error("Error fetching data in useScoreStore:", error);
+    console.error("Error fetching data in sendScoreStore:", error);
     throw error; // エラーを再スローする
   }
 }
@@ -133,13 +168,14 @@ export async function sendScoreStore(
 export async function sendScoreDestroy(
   id: string | string[] | undefined,
   useRouter: AppRouterInstance,
-  pageNum: number
+  pageNum: number,
+  setScores: React.Dispatch<React.SetStateAction<ScoreList | null>>
 ) {
   try {
     // axiosを使用して非同期にデータを送信する
     await axios.delete("/api/score/" + id).then(() => {
-      useRouter.push(LINK_DATA.HOME_LINK, { page: pageNum });
-      useRouter.refresh();
+      useRouter.push(LINK_DATA.HOME_LINK, { page: pageNum });// データの再取得を手動で実行
+      fetchScoreList(setScores, pageNum, "", "desc", "");
       // トースト表示
       toast.success("削除しました", {
         position: "bottom-left",
@@ -155,7 +191,7 @@ export async function sendScoreDestroy(
     });
   } catch (error) {
     // エラーハンドリング
-    console.error("Error fetching data in useScoreDestroy:", error);
+    console.error("Error fetching data in sendScoreDestroy:", error);
     throw error; // エラーを再スローする
   }
 }

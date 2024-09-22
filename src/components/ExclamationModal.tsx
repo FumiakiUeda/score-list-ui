@@ -11,6 +11,42 @@ interface ExclamationModalProps {
   scoreId: number;
   scoreName: string;
   pageNum: number;
+  setScores: React.Dispatch<React.SetStateAction<ScoreList | null>>
+}
+
+interface ScoreList {
+  current_page: number;
+  data: Array<Score>;
+  from: number;
+  to: number;
+  links: Array<Links>;
+  prev_page_url: string | null;
+  next_page_url: string | null;
+  first_page_url: string;
+  last_page_url: string;
+  last_page: number;
+  path: string;
+  per_page: number;
+  total: number;
+}
+
+interface Score {
+  id: number;
+  name: string;
+  composer: string;
+  arranger: string;
+  publisher: number;
+  note: string;
+  part: { part_id: number }[];
+  created_at: string;
+  updated_at: string;
+  user_id: number;
+}
+
+interface Links {
+  active: boolean;
+  label: string;
+  url: string;
 }
 
 // モーダル用カスタマイズスタイル
@@ -43,13 +79,16 @@ export function ExclamationModal({
   scoreId,
   scoreName,
   pageNum,
+  setScores,
 }: ExclamationModalProps) {
   const router = useRouter();
   // クリックした譜面を削除
-  const handleDelete = useCallback(async (id: number, page: number) => {
-    await sendScoreDestroy(id.toString(), router, page);
-    await router.refresh();
-  }, []);
+  const handleDelete = useCallback(
+    async (id: number, page: number) => {
+      await sendScoreDestroy(id.toString(), router, page, setScores);
+    },
+    [router, setScores]
+  );
 
   return (
     <Modal

@@ -12,6 +12,22 @@ import { ExclamationModal } from "@/components/ExclamationModal";
 import { PART_NAME, PUBLISHERS } from "@/constants/scoredata";
 import { LINK_DATA } from "@/constants/linkdata";
 
+interface ScoreList {
+  current_page: number;
+  data: Array<Score>;
+  from: number;
+  to: number;
+  links: Array<Links>;
+  prev_page_url: string | null;
+  next_page_url: string | null;
+  first_page_url: string;
+  last_page_url: string;
+  last_page: number;
+  path: string;
+  per_page: number;
+  total: number;
+}
+
 interface Score {
   id: number;
   name: string;
@@ -20,26 +36,35 @@ interface Score {
   publisher: number;
   note: string;
   part: { part_id: number }[];
+  created_at: string;
+  updated_at: string;
+  user_id: number;
+}
+
+interface Links {
+  active: boolean;
+  label: string;
+  url: string;
 }
 
 interface User {
   user?: UserObj;
 }
 
-type UserObj = {
+interface UserObj {
   id: number;
   name: string;
   email: string;
   email_verified_at: string;
   created_at: string;
   updated_at: string;
-};
+}
 
 const parts = PART_NAME;
 const publishers = PUBLISHERS;
 
 export function List({ user }: User) {
-  const [scores, setScores] = useState(null);
+  const [scores, setScores] = useState<ScoreList | null>(null);
 
   // ページ番号や並び替え情報をクエリから取得
   const searchParams = useSearchParams();
@@ -213,6 +238,7 @@ export function List({ user }: User) {
           setIsOpen={setModalIsOpen}
           scoreId={modalScoreId}
           scoreName={modalScoreName}
+          setScores={setScores}
           pageNum={pageNum}
         />
       </div>

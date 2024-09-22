@@ -1,6 +1,6 @@
-type Props = {
+interface Props {
   sectionName: string;
-};
+}
 
 export function Heading(props: Props) {
   return (

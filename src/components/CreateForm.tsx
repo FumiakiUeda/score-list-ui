@@ -1,22 +1,20 @@
 import Link from "next/link";
-import { TextInput } from "./TextInput";
-import { SelectBoxInput } from "./SelectBoxInput";
-import { CheckBoxInput } from "./CheckBoxInput";
+import { TextInput } from "@/components/TextInput";
+import { SelectBoxInput } from "@/components/SelectBoxInput";
+import { CheckBoxInput } from "@/components/CheckBoxInput";
 import { PART_NAME, PUBLISHERS } from "@/constants/scoredata";
 import { LINK_DATA } from "@/constants/linkdata";
 
-type SubmitFunction = () => void;
-
-type Props = {
-  submitFunc: SubmitFunction;
-  id: number;
-  name: string;
-  composer: string;
-  arranger: string;
-  publisher: number;
-  note: string;
-  part: { part_id: number }[];
-};
+interface Props {
+  submitFunc?: (data: any) => void;
+  id?: number;
+  name?: string;
+  composer?: string;
+  arranger?: string;
+  publisher?: number;
+  note?: string;
+  part?: { part_id: number }[];
+}
 
 const parts = PART_NAME;
 const publishers = PUBLISHERS;

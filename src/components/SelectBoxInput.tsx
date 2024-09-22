@@ -1,12 +1,12 @@
 "use client";
 
-type Props = {
+interface Props {
   class: string;
   label: string;
   input: string;
   options: string[];
-  value: number;
-};
+  value?: number;
+}
 
 export function SelectBoxInput(props: Props) {
   return (
