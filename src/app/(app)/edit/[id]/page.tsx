@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/auth";
-import { useScoreEdit, useScoreStore } from "@/hooks/backend";
+import { fetchScoreEdit, sendScoreStore } from "@/hooks/backend";
 import { Header } from "@/app/(app)/Header";
 import { Heading } from "@/components/Heading";
 import { Loading } from "@/components/Loading";
@@ -21,7 +21,14 @@ export default function Home() {
   const pageNum = parseInt(searchParams.get("page") || "1");
 
   useEffect(() => {
-    useScoreEdit(params.id, setScore);
+    const editScore = async () => {
+      try {
+        await fetchScoreEdit(params.id, setScore);
+      } catch (error) {
+        console.error("Failed to fetch edit score:", error);
+      }
+    };
+    editScore();
   }, [params.id]);
 
   // クリックでフォーム内容を送信
@@ -29,7 +36,7 @@ export default function Home() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.append("user_id", "1");
-    useScoreStore(params.id, formData, router, pageNum);
+    sendScoreStore(params.id, formData, router, pageNum);
   };
 
   return (

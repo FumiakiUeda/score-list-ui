@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { useScoreList } from "@/hooks/backend";
+import { fetchScoreList } from "@/hooks/backend";
 import { Pagenation } from "@/components/Pagenation";
 import { Loading } from "@/components/Loading";
 import { ExclamationModal } from "@/components/ExclamationModal";
@@ -66,7 +66,14 @@ export function List({ user }: User) {
 
   // スコアリストを取得してscoresを更新
   useEffect(() => {
-    useScoreList(setScores, pageNum, sort, order, query);
+    const getScores = async () => {
+      try {
+        await fetchScoreList(setScores, pageNum, sort, order, query);
+      } catch (error) {
+        console.error("Failed to fetch scores:", error);
+      }
+    };
+    getScores();
   }, [pageNum, sort, order, query]);
 
   const scoreLength = scores ? scores.total : 0;

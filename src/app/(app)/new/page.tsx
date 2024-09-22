@@ -3,7 +3,7 @@
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/auth";
-import { useScoreCreate } from "@/hooks/backend";
+import { sendScoreCreate } from "@/hooks/backend";
 import { Header } from "@/app/(app)/Header";
 import { Heading } from "@/components/Heading";
 import { CreateForm } from "@/components/CreateForm";
@@ -17,7 +17,7 @@ export default function Home() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.append("user_id", "1");
-    useScoreCreate(formData, router);
+    sendScoreCreate(formData, router);
   };
 
   return (

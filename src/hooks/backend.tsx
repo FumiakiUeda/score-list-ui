@@ -15,7 +15,7 @@ interface Score {
 }
 
 // Score一覧取得
-export async function useScoreList(
+export async function fetchScoreList(
   setScores: React.Dispatch<React.SetStateAction<any>>,
   page: number,
   sort: string,
@@ -43,7 +43,7 @@ export async function useScoreList(
 }
 
 // 新規Score保存
-export async function useScoreCreate(
+export async function sendScoreCreate(
   params: FormData,
   useRouter: AppRouterInstance
 ) {
@@ -72,7 +72,7 @@ export async function useScoreCreate(
 }
 
 // 編集するScore取得
-export async function useScoreEdit(
+export async function fetchScoreEdit(
   id: string | string[] | undefined,
   setScore: React.Dispatch<React.SetStateAction<any>>
 ) {
@@ -89,8 +89,8 @@ export async function useScoreEdit(
 }
 
 // 編集したScoreデータを反映する
-export async function useScoreStore(
-  id: number | number[] | undefined,
+export async function sendScoreStore(
+  id: string | string[] | undefined,
   params: FormData,
   useRouter: AppRouterInstance,
   pageNum: number
@@ -108,10 +108,7 @@ export async function useScoreStore(
     };
     // axiosを使用して非同期にデータを送信する
     await axios.patch("/api/score/" + id, requestBody).then(() => {
-      useRouter.push({
-        pathname: LINK_DATA.HOME_LINK,
-        query: { page: pageNum },
-      });
+      useRouter.push(LINK_DATA.HOME_LINK, { page: pageNum });
       // トースト表示
       toast.success("更新しました", {
         position: "bottom-left",
@@ -133,18 +130,15 @@ export async function useScoreStore(
 }
 
 // Scoreを削除する
-export async function useScoreDestroy(
-  id: number | number[] | undefined,
+export async function sendScoreDestroy(
+  id: string | string[] | undefined,
   useRouter: AppRouterInstance,
   pageNum: number
 ) {
   try {
     // axiosを使用して非同期にデータを送信する
     await axios.delete("/api/score/" + id).then(() => {
-      useRouter.push({
-        pathname: LINK_DATA.HOME_LINK,
-        query: { page: pageNum },
-      });
+      useRouter.push(LINK_DATA.HOME_LINK, { page: pageNum });
       useRouter.refresh();
       // トースト表示
       toast.success("削除しました", {

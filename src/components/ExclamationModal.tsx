@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { useScoreDestroy, useScoreList } from "@/hooks/backend";
+import { sendScoreDestroy } from "@/hooks/backend";
 import Modal from "react-modal";
 
 interface ExclamationModalProps {
@@ -47,7 +47,7 @@ export function ExclamationModal({
   const router = useRouter();
   // クリックした譜面を削除
   const handleDelete = useCallback(async (id: number, page: number) => {
-    await useScoreDestroy(id, router, page);
+    await sendScoreDestroy(id.toString(), router, page);
     await router.refresh();
   }, []);
 
