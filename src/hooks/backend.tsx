@@ -49,7 +49,15 @@ interface NavigateOptions {
   page: number;
 }
 
-// Score一覧取得
+/**
+ * Score一覧取得
+ * 
+ * @param setScores スコア一覧データの状態管理
+ * @param page 現在のページ番号
+ * @param sort 並び替えの基準となるカラム
+ * @param order 昇順・降順
+ * @param query 検索文字列
+ */
 export async function fetchScoreList(
   setScores: React.Dispatch<React.SetStateAction<any>>,
   page: number,
@@ -77,7 +85,12 @@ export async function fetchScoreList(
   }
 }
 
-// 新規Score保存
+/**
+ * 新規Score保存
+ * 
+ * @param params フォームの送信データ
+ * @param useRouter 画面遷移状態管理
+ */
 export async function sendScoreCreate(
   params: FormData,
   useRouter: AppRouterInstance
@@ -106,7 +119,12 @@ export async function sendScoreCreate(
   }
 }
 
-// 編集するScore取得
+/**
+ * 編集するScore取得
+ * 
+ * @param id 編集する譜面のID
+ * @param setScore 譜面データの状態管理
+ */
 export async function fetchScoreEdit(
   id: string | string[] | undefined,
   setScore: React.Dispatch<React.SetStateAction<any>>
@@ -123,7 +141,13 @@ export async function fetchScoreEdit(
   }
 }
 
-// 編集したScoreデータを反映する
+/**
+ * 編集したScoreデータを反映する
+ * @param id 編集した譜面のID
+ * @param params フォームの送信データ
+ * @param useRouter 画面遷移状態管理
+ * @param pageNum 当該譜面の編集前のページ位置
+ */
 export async function sendScoreStore(
   id: string | string[] | undefined,
   params: FormData,
@@ -164,7 +188,13 @@ export async function sendScoreStore(
   }
 }
 
-// Scoreを削除する
+/**
+ * Scoreを削除する
+ * @param id 削除する譜面のID
+ * @param useRouter 画面遷移状態管理
+ * @param pageNum 現在のページ番号
+ * @param setScores 譜面一覧データの状態管理
+ */
 export async function sendScoreDestroy(
   id: string | string[] | undefined,
   useRouter: AppRouterInstance,
