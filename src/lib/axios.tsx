@@ -7,6 +7,9 @@ const axios = Axios.create({
   },
   withCredentials: true,
   withXSRFToken: true,
+  xsrfHeaderName: "X-XSRF-TOKEN",
 });
+
+axios.defaults.withCredentials = true;
 
 export default axios;

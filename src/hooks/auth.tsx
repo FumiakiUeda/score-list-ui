@@ -118,7 +118,7 @@ export const useAuth = ({
     axios
       .post("/reset-password", { token: params.token, ...props })
       .then((response) =>
-        router.push("/login?reset=" + btoa(response.data.status))
+        router.push("/login")
       )
       .catch((error) => {
         if (error.response.status !== 422) throw error;

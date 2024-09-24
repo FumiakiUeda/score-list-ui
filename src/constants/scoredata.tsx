@@ -3,6 +3,7 @@
  * @type {string[]}
  */
 export const PART_NAME = [
+  "Score",
   "Flute",
   "Clarinet",
   "Oboe",
@@ -25,6 +26,7 @@ export const PART_NAME = [
 export const PUBLISHERS = [
   "ミュージック8",
   "ブレーン",
+  "全日本吹奏楽連盟",
   "New Sounds in Brass",
   "Winds Score",
   "De Haske",
